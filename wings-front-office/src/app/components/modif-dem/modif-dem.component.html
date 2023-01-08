@@ -1,0 +1,164 @@
+
+<!-- ========================= SECTION PAGETOP ========================= -->
+
+<!-- ========================= SECTION PAGETOP END// ========================= -->
+<section class="section-pagetop bg-gray">
+  <div class="container">
+    <h2 class="title-page" style="text-align: center; font-size: 50PX;">Modifier <span style="color: #FF6314;">Demande</span></h2>
+  </div> <!-- container //  -->
+  </section>
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+  <div class="container">
+    <div class="row">
+      <div class="sidenav">
+        <h1 class="title-page" id="APC" >Mon compte</h1><mat-divider></mat-divider>
+        <a [routerLink]="['/profile-main']" id="a" >Aperçu du compte</a><mat-divider></mat-divider>
+        <button class="list-group-item" id="b"class="dropdown-btn">Ordres
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+          <a [routerLink]="['/']" id="a">Shop</a><mat-divider></mat-divider>
+          <a [routerLink]="['/']" id="a">Consulter Ordres</a>
+        </div><mat-divider></mat-divider>
+        <button class="list-group-item" id="b"class="dropdown-btn">Demandes
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+          <a [routerLink]="['/add-demande']"  id="a" >Ajouter Demande</a><mat-divider></mat-divider>
+          <a [routerLink]="['/list-demande']" id="a">Consulter Demandes</a>
+        </div><mat-divider></mat-divider>
+        <a list-demande id="a" >Consulter Ofres</a><mat-divider></mat-divider>
+        <a [routerLink]="['/']" id="a">Paramètre</a><mat-divider></mat-divider>
+        <a [routerLink]="['/']" id="a">Déconnecter</a><mat-divider></mat-divider>
+
+      </div>
+      <main class="col-md-9">
+
+        <div class="card">
+            <div class="card-body">
+              <form >
+                <div class="col-md-9" style="margin: auto;
+                padding: 10px;">
+                 
+                 <div class="form-row">
+                   <div class="form-group col-md-6">
+                     <label><i class="fas fa-arrow-alt-circle-right"></i>&nbsp;Gouvernorat de Départ</label>
+                     <select class="form-control" name="gov" [(ngModel)]="demande.departGov" #gov="ngModel"(change)="selectChangeHandler($event)" >
+                       <option value=""  default="true"> {{demand.route.depar_gov}}</option>
+                       <option *ngFor="let Governorate of Governorates; " [value]="Governorate.govName" >{{ Governorate.govName }}
+                       </option>
+                     </select>
+         
+                   </div> <!-- form-group end.// -->
+                   <div class="form-group col-md-6">
+                     <label><i class="fas fa-arrow-alt-circle-right"></i>&nbsp;Ville de Départ</label>
+                     <select class="form-control" name="city" [(ngModel)]="demande.departAdr" required #city="ngModel"
+                     (change)="selectChangeHandler($event)">
+                     <option value=""  default="true"> {{demand.route.adr_departure}}</option>
+                     <option *ngFor="let city of Citys; " [value]="city.cityName">{{ city.cityName }}
+                     </option>
+                   </select>
+                   </div> <!-- form-group end.// -->
+                 </div> <!-- form-row.// --><br><mat-divider></mat-divider><br>
+                 <div class="form-row">
+                   <div class="form-group col-md-6">
+                     <label><i class="fas fa-pause-circle"></i>&nbsp;Gouvernorat de Destination</label>
+                     <select class="form-control" name="gov" [(ngModel)]="demande.arriGov" required #gov="ngModel"
+                       (change)="selectChangeHandlerII($event)">
+                       <option value=""  default="true">  {{demand.route.arri_gov}}</option>
+                       <option *ngFor="let Governorate of Governorates; " [value]="Governorate.govName">{{ Governorate.govName }}
+                       </option>
+                     </select>
+                   </div> <!-- form-group end.// -->
+                   <div class="form-group col-md-6">
+                     <label><i class="fas fa-pause-circle"></i>&nbsp;Ville de Destination</label>
+                     <select class="form-control" name="city" [(ngModel)]="demande.arriAdr" required #city="ngModel"
+                     (change)="selectChangeHandler($event)">
+                     <option value=""  default="true">  {{demand.route.adr_arrival}}</option>
+                     <option *ngFor="let city of Citys; " [value]="city.cityName">{{ city.cityName }}
+                     </option>
+                   </select>
+                   </div> <!-- form-group end.// -->
+                 </div> <!-- form-row.// --><br><mat-divider></mat-divider><br>
+               <div class="form-row">
+                 <div class="form-group col-md-6">
+                   <label><i class="fas fa-clipboard-list"></i>&nbsp;Type Demande</label>
+   
+                   <select class="form-control" id="type" required [(ngModel)]="demande.type" name="type" (change)="selectChangeHandler2($event)">
+                     <option  value=""  default="true">{{demand.type}}</option>
+                       <option value="colis" >colis</option>
+                       <option  value="enveloppe" >enveloppe</option>
+                   </select>
+                 </div> <!-- form-group end.// -->
+                 <div class="form-group col-md-6">
+                   <label><i class="fas fa-phone"></i>&nbsp;Tel-receiver</label>
+                   <input type="text" class="form-control" placeholder="+216" id="tel_receiver" [(ngModel)]="demande.tel_receiver" name="tel_receiver" >
+                  </div>    
+                 </div> <!-- form-group end.// -->
+                 <br><mat-divider></mat-divider><br>
+                 <div class="form-row">
+                 <div class="form-group col-md-6">
+                  <label><i class="fa fa-calendar" aria-hidden="true"id="mat"></i>&nbsp;La date de réception </label>
+                 
+                    <input type="date" value={{date}} class="form-control" placeholder="Choisissez une date" id="date" name="date" (change)="selectDate($event)">
+              </div>
+              <div class="form-group col-md-6">
+                   
+                <label><i class="fas fa-comment-alt" id="Commentaire"></i>&nbsp;Commentaire</label>
+                <textarea class="form-control" id="remark" name="remark" rows="1"   cols="38" [(ngModel)]="demande.remark"></textarea>
+                </div>
+                
+                 <!-- form-group end.// -->
+               </div> <!-- form-row.// --><br><mat-divider></mat-divider><br>
+     
+
+               <div class="form-row ">
+                 <label class="poids"><i class="fas fa-weight-hanging"></i> Le Poids De Coli &nbsp;</label>
+                   <input  type="text" placeholder=" kg" class="form-control" style="width: 50px;" id="weight" [(ngModel)]="demande.weight" name="weight" >&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
+                   
+                   <label class="poids"><i class="fas fa-ruler-vertical"></i> Le Hauteur De Coli &nbsp;</label>
+                   <input type="text"  placeholder="cm"class="form-control"  style="width: 50px;" id="height" [(ngModel)]="demande.height" name="height" >&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
+                   <label class="poids"><i class="fas fa-ruler-horizontal"></i> Le Longueur De Coli &nbsp;</label>
+                   <input type="text"  placeholder="cm" class="form-control"  style="width: 50px;"id="length" [(ngModel)]="demande.length" name="length" >
+                   
+                  </div> <!-- form-row.// -->
+                  <br><mat-divider></mat-divider><br>
+                  <div class="form-row">
+                    <label class="hoverable" for="fileInput">
+                      <img
+                        [src]="url ? url : 'https://img.freepik.com/vecteurs-libre/icones-livraison-isoles-boites-carton-colis_33099-828.jpg?t=st=1650642851~exp=1650643451~hmac=634c87ef353d2d77bedcaabb8b5c63ab81def9a9cb158177798626b34a114e83&w=740'">
+                      <div class="hover-text">Sélectionner une image de colis (PNG, JPG)</div>
+                      <div class="background"></div>
+                    </label>
+                    <br />
+                    <input id="fileInput" type='file' accept=".jpg, .jpeg, .png" (change)="selectFile($event)">
+                  </div>
+                 
+            
+               <br><mat-divider></mat-divider><br>
+               <button  class="btn btn-primary" (click)="saveDemand()">Modifier</button>
+     
+               <div *ngIf="submitted">
+                 <h4>You submitted successfully!</h4>
+               </div>
+               <br><br><br><br><br><br>
+     
+                </div> <!-- col.// -->
+                <!-- col.// -->
+             
+               </form>
+               </div> <!-- card-body.// -->
+             </div> <!-- card .// -->
+     
+     
+     
+           </main>
+       </div>
+   
+     </div> <!-- container .//  -->
+   </section>
+   <!-- ========================= SECTION CONTENT END// ========================= -->
+   
+   
+ 

@@ -1,0 +1,162 @@
+<section class="section-pagetop bg-gray">
+  <div class="container">
+    <h2 class="title-page" style="text-align: center; font-size: 50PX;">Consulter votre <span
+        style="color: #FF6314;">Offers de livraison</span></h2>
+  </div> <!-- container //  -->
+</section>
+<section class="section-content padding-y">
+  <div class="container">
+    <div class="row">
+      <div class="sidenav">
+
+        <h1 class="title-page" id="APC">Mon compte</h1>
+        <mat-divider></mat-divider>
+        <a [routerLink]="['/profile-main']" id="a">Aperçu du compte</a>
+        <mat-divider></mat-divider>
+        <button class="list-group-item" id="b" class="dropdown-btn">Ordres
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+          <a [routerLink]="['/home']" id="a">Shop</a>
+          <mat-divider></mat-divider>
+          <a [routerLink]="['/list-orders']" id="a">Consulter Ordres</a>
+        </div>
+        <div *ngIf="currentUser.roles.includes('ROLE_USER') && currentUser.isActive">
+        <mat-divider></mat-divider>
+        <button class="list-group-item" id="b" class="dropdown-btn">Demande de livraison
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+          <a [routerLink]="['/add-demand']" id="a">Ajouter Demande</a>
+          <mat-divider></mat-divider>
+          <a [routerLink]="['/list-demand']" id="a">Consulter Demandes</a>
+          <mat-divider></mat-divider>
+          <a [routerLink]="['/offers']" id="a">Offres de livraison</a>
+          <mat-divider></mat-divider>
+          <a [routerLink]="['/requests-send']" id="a">Invitation envoyée</a>
+        </div>
+      </div>
+        <div *ngIf="currentUser.roles.includes('ROLE_DELIVERY') && currentUser.isActive">
+          <mat-divider></mat-divider>
+          <button class="list-group-item" id="b" class="dropdown-btn">Offre de livraison
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-container">
+            <a [routerLink]="['/add-offer']" id="a">Ajouter Offre</a>
+            <mat-divider></mat-divider>
+            <a [routerLink]="['/list-offer']" id="a">Consulter Offres</a>
+            <mat-divider></mat-divider>
+            <a [routerLink]="['/requests']" id="a">Invitation réussie </a>
+            <mat-divider></mat-divider>
+          </div>
+        </div>
+        <div  *ngIf="currentUser.roles.includes('ROLE_USER_PRO') && currentUser.isActive">
+          <mat-divider></mat-divider>
+          <button class="list-group-item" id="b" class="dropdown-btn">Magasin
+              <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-container">
+              <a [routerLink]="['/card']" id="a">Aperçu du Carte Pro</a>
+              <mat-divider></mat-divider>
+              <a [routerLink]="['/add-product']" id="a">Ajouter Produit</a>
+              <mat-divider></mat-divider>
+              <a [routerLink]="['/list-product']" id="a">Consulter produit</a>
+              <mat-divider></mat-divider>
+          </div>
+      </div>
+        <mat-divider></mat-divider>
+        <a [routerLink]="['/']" id="a">Paramètre</a>
+        <mat-divider></mat-divider>
+        <a [routerLink]="['/']" id="a">Déconnecter</a>
+        <mat-divider></mat-divider>
+
+
+      </div>
+      <!-- col.// -->
+      <main class="col-md-9">
+        <div class="card mb-3">
+          <div class="card-body">
+            <!-- row.// -->
+
+            <div class="row">
+              <div class="col-md-2">Filter by</div> <!-- col.// -->
+              <div class="col-md-10">
+                <ul class="list-inline">
+
+
+                  <li class="list-inline-item mr-3">
+                    <div class="form-inline">
+                      <label class="mr-2">Destination</label>
+                      <input class="form-control form-control-sm" placeholder="Destination" type="text"
+                        [(ngModel)]="destination">
+                    </div>
+                  </li>
+                  <li class="list-inline-item mr-3">
+                    <label class="custom-control mt-1 custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" [(ngModel)]="ready">
+                      <div class="custom-control-label">Ready to ship
+                      </div>
+                    </label>
+                  </li>
+                  <button type="submit" class="btn btn-sm btn-light ml-2" (click)="ok()">Ok</button>
+                </ul>
+              </div> <!-- col.// -->
+            </div> <!-- row.// -->
+          </div> <!-- card-body .// -->
+        </div>
+        <article class="card mb-4">
+
+          <!-- card-body .// -->
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <tbody>
+                <tr *ngFor="let offer of offers | paginate
+          : {
+              itemsPerPage: tableSize,
+              currentPage: page,
+              totalItems: count
+            }; let i = index" [class.active]="i == currentIndex">
+                  <td>
+                    <p class="title mb-0" class="fas fa-arrow-alt-circle-right">{{ " "+offer.route.depar_gov}}
+                      {{offer.route.adr_departure}}</p>
+                    &nbsp;&nbsp;<p class="title mb-0" class="fas fa-pause-circle">{{" "+offer.route.arri_gov}}
+                      {{offer.route.adr_arrival}}</p>
+                  </td>
+                  <td>
+                    <p class="title mb-0">{{ offer.date_delivery }} </p>
+                    <p class="title mb-0">{{ offer.Date_deadline }} </p>
+                  </td>
+                  <td>
+                    <var class="price text-muted">{{ offer.price }}</var> <br>
+                    <p class="title mb-0">{{ offer.etatoffer }} </p>
+                  </td>
+                  <td width="250"> <a href="#" class="btn btn-outline-primary">Track order</a>
+                    <div class="dropdown d-inline-block">
+                      <a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-outline-secondary"
+                        aria-expanded="false">More</a>
+                      <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end"
+                        style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(76px, 38px, 0px);">
+                        <a [routerLink]="['/modify-offer']" [state]="offer" class="dropdown-item">Modifier</a>
+                        <a href="#" class="dropdown-item">Annuler</a>
+                      </div>
+                    </div> <!-- dropdown.// -->
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div> <!-- table-responsive .end// -->
+          <div class="d-flex justify-content-center">
+            <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+            </pagination-controls>
+          </div>
+        </article> <!-- card order-item .// -->
+
+
+
+
+      </main>
+    </div>
+
+  </div> <!-- container .//  -->
+</section>

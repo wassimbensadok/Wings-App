@@ -1,0 +1,172 @@
+<div class="vertical-menu">
+
+    <div data-simplebar="init" class="h-100">
+        <div class="simplebar-wrapper" style="margin: 0px;">
+            <div class="simplebar-height-auto-observer-wrapper">
+                <div class="simplebar-height-auto-observer"></div>
+            </div>
+            <div class="simplebar-mask">
+                <div class="simplebar-offset" style="right: -15px; bottom: 0px;">
+                    <div class="simplebar-content-wrapper" style="height: 100%; overflow: hidden scroll;">
+                        <div class="simplebar-content" style="padding: 0px;">
+
+                            <!--- Sidemenu -->
+                            <div id="sidebar-menu" class="mm-active">
+                                <!-- Left Menu Start -->
+                                <ul class="metismenu list-unstyled mm-show" id="side-menu">
+                                    <li class="menu-title" key="t-menu">Menu</li>
+
+
+
+
+                                    <div *ngIf="currentUser.roles.includes('ROLE_ADMIN')">
+                                        <li class="menu-title" key="t-apps">ADMINS</li>
+                                        <li>
+                                            <a href="/home" class="waves-effect mm-active">
+                                                <i class="bx bx-home-circle"></i><span
+                                                    class="badge rounded-pill bg-info float-end"></span>
+                                                <span key="t-dashboards">Dashboards</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                                <i class="bx bx-user"></i>
+                                                <span key="t-administrateurs"><span>Gérer Administrateurs</span>
+                                                </span></a>
+                                            <ul class="sub-menu mm-collapse" aria-expanded="false">
+                                                <li><a href="/add-admin" key="t-add-administrateurs">Ajouter
+                                                        Administrateurs</a></li>
+                                                <li><a href="/list-admin" key="t-list-administrateurs">Liste des
+                                                        Administrateurs</a></li>
+
+                                            </ul>
+                                        </li>
+
+                                        <li>
+                                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                                <i class="bx bx-user-circle"></i>
+                                                <span key="t-users">Gérer Utilisateurs</span>
+                                            </a>
+                                            <ul class="sub-menu mm-collapse" aria-expanded="false">
+                                                <li><a href="/list-users" key="t-client">Liste des Clients</a></li>
+                                                <li><a href="/list-delivery" key="t-livreur">Liste des Livreurs</a></li>
+                                                <li><a href="/list-vendor" key="t-vendeur">Liste des Vendeurs</a></li>
+
+                                            </ul>
+                                        </li>
+
+                                        <li>
+                                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                                <i class="bx bx-receipt"></i>
+                                                <span key="t-invoice">Gérer Factures</span>
+                                            </a>
+                                            <ul class="sub-menu mm-collapse" aria-expanded="false">
+                                                <li><a href="/add-invoice" key="t-add-invoice">Ajouter Factures</a></li>
+                                                <li><a href="/list-invoice" key="t-list-invoice">Listd des Factures</a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+
+                                        <li>
+                                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                                <i class="bx bx-basket"></i>
+                                                <span key="t-product">Gérer Produits</span>
+                                            </a>
+                                            <ul class="sub-menu mm-collapse" aria-expanded="false">
+                                                <li><a href="/list-product" key="t-product-list">Liste des Produits</a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+
+                                        <li>
+                                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                                <i class="bx bx-basket"></i>
+                                                <span key="t-product">Commandes</span>
+                                            </a>
+                                            <ul class="sub-menu mm-collapse" aria-expanded="false">
+                                                <li><a href="orders" key="t-product-list">Liste des Commandes</a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+
+                                        <li>
+                                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                                <i class="bx bx-conversation"></i>
+                                                <span key="t-projects">Reclamations</span>
+                                            </a>
+                                            <ul class="sub-menu mm-collapse" aria-expanded="false">
+                                                <li><a href="/list-complaint" key="t-p-grid">Liste des Reclamations</a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+                                    </div>
+
+                                    <div *ngIf="currentUser.roles.includes('ROLE_AGENT')">
+                                        <li class="menu-title" key="t-apps">Agent</li>
+
+
+
+
+
+                                        <li>
+                                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                                <i class="bx bxs-user-detail"></i>
+                                                <span key="t-administrateurs"><span>Gérer Néo-Compte</span>
+                                                </span></a>
+                                            <ul class="sub-menu mm-collapse" aria-expanded="false">
+                                                <li><a href="/list-new-delivery" key="t-add-administrateurs">Liste des
+                                                        Nouveaux Livreurs</a></li>
+                                                <li><a href="/list-new-vendors" key="t-list-administrateurs">Liste des
+                                                        Nouveaux Vendeurs</a></li>
+
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                                <i class="bx bxs-truck"></i>
+                                                <span key="t-administrateurs"><span>Consulter Les Livreurs</span>
+                                                </span></a>
+                                            <ul class="sub-menu mm-collapse" aria-expanded="false">
+                                                <li><a href="/list-account-delivery" key="t-add-administrateurs">Liste
+                                                        des Livreurs</a></li>
+
+
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                                <i class="bx bx-conversation"></i>
+                                                <span key="t-projects">Reclamations</span>
+                                            </a>
+                                            <ul class="sub-menu mm-collapse" aria-expanded="false">
+                                                <li><a href="/list-complaint" key="t-p-grid">Liste des Reclamations</a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+                                    </div>
+
+
+
+                                </ul>
+                            </div>
+                            <!-- Sidebar -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="simplebar-placeholder" style="width: auto; height: 1515px;"></div>
+        </div>
+        <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
+            <div class="simplebar-scrollbar" style="transform: translate3d(0px, 0px, 0px); display: none;"></div>
+        </div>
+        <div class="simplebar-track simplebar-vertical" style="visibility: visible;">
+            <div class="simplebar-scrollbar"
+                style="height: 56px; transform: translate3d(0px, 131px, 0px); display: block;"></div>
+        </div>
+    </div>
+</div>

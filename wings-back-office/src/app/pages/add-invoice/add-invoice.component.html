@@ -1,0 +1,103 @@
+
+<div class="main-content">
+  <div class="page-content">
+
+<div class="container-fluid">
+
+  <!-- start page title -->
+<div class="row">
+<div class="col-12">
+<div class="page-title-box d-sm-flex align-items-center justify-content-between">
+<h4 class="mb-sm-0 font-size-18">Ajouter facteures</h4>
+
+<div class="page-title-right">
+  <ol class="breadcrumb m-0">
+      <li>Gérer facteure</li>
+      <li> /Ajouter facteure</li>
+  </ol>
+</div>
+
+</div>
+</div>
+</div>
+<!-- end page title -->
+  <div class="row">
+      <div class="col-12">
+          <div class="card">
+              <div class="card-body">
+                <form>
+
+
+                  <div class="mb-3 row">
+                      <label for="Livreur" class="col-md-2 col-form-label">Nom Livreur</label>
+                      <div class="col-md-10">
+                          <input class="form-control" type="text" placeholder="Entrée Le Nom de Livreur" id="example-text-input" [(ngModel)]="facteur.nomliv" [ngModelOptions]="{standalone: true}">
+                      </div>
+                  </div>
+
+                  <div class="mb-3 row">
+                    <label for="client1" class="col-md-2 col-form-label">Client 1</label>
+                    <div class="col-md-10">
+                        <input class="form-control" type="text" placeholder="Entrée Le Prenom de la 1er Client" id="example-text-input"[(ngModel)]="facteur.nomcl1" [ngModelOptions]="{standalone: true}">
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                  <label for="client2" class="col-md-2 col-form-label">Client 2</label>
+                  <div class="col-md-10">
+                      <input class="form-control" type="text" placeholder="Entrée Le Prenom de la 2ème Client" id="example-text-input"[(ngModel)]="facteur.nomcl2" [ngModelOptions]="{standalone: true}">
+                  </div>
+              </div>
+
+              <div class="mb-3 row">
+              
+                <label for="colis" class="col-md-2 col-form-label">Type Colis</label>
+                <div class="col-md-10">
+                  <select class="form-control" id="type" required [(ngModel)]="facteur.type"[ngModelOptions]="{standalone: true}" name="type" (change)="selectype($event)">
+                    <option  value="" >  Choose...</option>
+                      <option value="colis" >colis</option>
+                      <option  value="env">enveloppe</option>
+                  </select>
+                </div>
+            </div>
+           
+            
+              
+           
+
+            <div class="mb-3 row">
+              <label for="montant" class="col-md-2 col-form-label">Montant</label>
+              <div class="col-md-10">
+                <div class="input-group bootstrap-touchspin bootstrap-touchspin-injected"><span class="input-group-btn input-group-prepend"></span><span class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"><span class="input-group-text">$</span></span><input data-toggle="touchspin" type="text" data-bts-prefix="$" class="form-control"[(ngModel)]="facteur.montant" [ngModelOptions]="{standalone: true}"><span class="input-group-btn input-group-append"></span></div>
+              </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="date" class="col-md-2 col-form-label">Date</label>
+            <div class="col-md-10">
+              <div class="input-group" id="datepicker1">
+                <input type="text" class="form-control" placeholder="dd M, yyyy" data-date-format="dd M, yyyy" data-date-container="#datepicker1" data-provide="datepicker" [(ngModel)]="facteur.date" [ngModelOptions]="{standalone: true}">
+
+                <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+            </div>
+            </div>
+
+        </div>
+                  <br>
+                  <br>
+                  <button class="btn btn-primary" type="submit" style = "position:relative; left:800px !important;" (click)="ajout()">Ajouter</button>
+
+                </form>
+              </div>
+          </div>
+      </div> <!-- end col -->
+  </div>
+  <!-- end row -->
+
+
+
+
+
+
+</div>
+  </div>
+  </div>

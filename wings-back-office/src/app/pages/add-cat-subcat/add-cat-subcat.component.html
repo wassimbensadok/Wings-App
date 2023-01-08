@@ -1,0 +1,107 @@
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0 font-size-18">Add Product</h4>
+
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
+                                <li class="breadcrumb-item active">Add Product</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <h4 class="card-title">Basic Information</h4>
+                            <p class="card-title-desc">créer une nouvelle catégorie</p>
+
+                            <form [formGroup]="category" (ngSubmit)="createCategory()">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="mb-3">
+                                            <label for="productname">Nom categorie</label>
+                                            <input id="productname" name="catName" type="text" class="form-control" formControlName="catName">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="mb-3">
+                                            <button type="submit" class="btn btn-primary waves-effect waves-light"
+                                                style="margin-top: 28px;" [disabled]="!category.valid">Save
+                                                Changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+            <!-- end row -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <h4 class="card-title">Basic Information</h4>
+                            <p class="card-title-desc">créer une nouvelle sous_catégorie</p>
+
+                            <form [formGroup]="subCategory" (ngSubmit)="createSubCategory()">
+                                <div class="row">
+                                    <div class="col-sm-6" style="width: 350px;">
+                                        <div class="mb-3">
+                                        <label class="control-label">Category</label>
+                                        <select class="form-control select2" name="catId" formControlName="catId">
+                                            <option *ngFor="let Category of Categorys; " [value]="Category.id">{{
+                                                Category.categoryName }}
+                                            </option>
+                                        </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6" style="width: 380px;">
+                                        <div class="mb-3">
+                                            <label for="productname">Sous Categorie</label>
+                                            <input id="productname" name="subCatName" type="text" class="form-control" formControlName="subCatName">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6" style="width: 130px;">
+                                        <div class="mb-3" style="width: 120px;">
+                                            <button type="submit" class="btn btn-primary waves-effect waves-light"
+                                                style="margin-top: 28px;" [formGroup]="subCategory" (ngSubmit)="createSubCategory()">Save
+                                                Changes</button>
+                                            </div>
+                                    </div> 
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+            <!-- end row -->
+
+        </div> <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->

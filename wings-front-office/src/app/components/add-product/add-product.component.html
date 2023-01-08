@@ -1,0 +1,259 @@
+<!-- ========================= SECTION PAGETOP ========================= -->
+<section class="section-pagetop bg-gray">
+    <div class="container">
+        <h2 class="title-page" style="text-align: center; font-size: 50PX;">Ajouter <span
+                style="color: #FF6314;">Produit</span></h2>
+    </div> <!-- container //  -->
+</section>
+<!-- ========================= SECTION PAGETOP END// ========================= -->
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+    <div class="container">
+        <div class="row">
+            <div class="sidenav">
+
+                <h1 class="title-page" id="APC">Mon compte</h1>
+                <mat-divider></mat-divider>
+                <a [routerLink]="['/profile-main']" id="a">Aperçu du compte</a>
+                <mat-divider></mat-divider>
+                <button class="list-group-item" id="b" class="dropdown-btn">Ordres
+                  <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-container">
+                  <a [routerLink]="['/home']" id="a">Shop</a>
+                  <mat-divider></mat-divider>
+                  <a [routerLink]="['/list-orders']" id="a">Consulter Ordres</a>
+                </div>
+                <div *ngIf="currentUser.roles.includes('ROLE_USER') && currentUser.isActive">
+                <mat-divider></mat-divider>
+                <button class="list-group-item" id="b" class="dropdown-btn">Demande de livraison
+                  <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-container">
+                  <a [routerLink]="['/add-demand']" id="a">Ajouter Demande</a>
+                  <mat-divider></mat-divider>
+                  <a [routerLink]="['/list-demand']" id="a">Consulter Demandes</a>
+                  <mat-divider></mat-divider>
+                  <a [routerLink]="['/offers']" id="a">Offres de livraison</a>
+                  <mat-divider></mat-divider>
+                  <a [routerLink]="['/requests-send']" id="a">Invitation envoyée</a>
+                </div>
+              </div>
+                <div *ngIf="currentUser.roles.includes('ROLE_DELIVERY') && currentUser.isActive">
+                  <mat-divider></mat-divider>
+                  <button class="list-group-item" id="b" class="dropdown-btn">Offre de livraison
+                    <i class="fa fa-caret-down"></i>
+                  </button>
+                  <div class="dropdown-container">
+                    <a [routerLink]="['/add-offer']" id="a">Ajouter Offre</a>
+                    <mat-divider></mat-divider>
+                    <a [routerLink]="['/list-offer']" id="a">Consulter Offres</a>
+                    <mat-divider></mat-divider>
+                    <a [routerLink]="['/requests']" id="a">Invitation réussie </a>
+                    <mat-divider></mat-divider>
+                  </div>
+                </div>
+                <div  *ngIf="currentUser.roles.includes('ROLE_USER_PRO') && currentUser.isActive">
+                  <mat-divider></mat-divider>
+                  <button class="list-group-item" id="b" class="dropdown-btn">Magasin
+                      <i class="fa fa-caret-down"></i>
+                  </button>
+                  <div class="dropdown-container">
+                      <a [routerLink]="['/card']" id="a">Aperçu du Carte Pro</a>
+                      <mat-divider></mat-divider>
+                      <a [routerLink]="['/add-product']" id="a">Ajouter Produit</a>
+                      <mat-divider></mat-divider>
+                      <a [routerLink]="['/list-product']" id="a">Consulter produit</a>
+                      <mat-divider></mat-divider>
+                  </div>
+              </div>
+                <mat-divider></mat-divider>
+                <a [routerLink]="['/']" id="a">Paramètre</a>
+                <mat-divider></mat-divider>
+                <a [routerLink]="['/']" id="a">Déconnecter</a>
+                <mat-divider></mat-divider>
+        
+        
+              </div>
+            <main class="col-md-9">
+
+                <div class="card">
+                    <div class="card-body">
+                        <form>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label><i class="fab fa-product-hunt"></i>
+                                        Nom de Produit</label>
+                                    <input type="text" class="form-control" id="name" name="name" required minlength="3"
+                                        maxlength="25" [(ngModel)]="produit.name" />
+                                </div> <!-- form-group end.// -->
+                                <div class="form-group col-md-6">
+
+                                    <label><i class="fas fa-money-check-alt"></i>
+                                        slug de Produit</label>
+                                    <input type="text" class="form-control" name="slug" required minlength="3"
+                                        maxlength="25" [(ngModel)]="produit.slug" />
+                                </div> <!-- form-group end.// -->
+                            </div>
+                            <br>
+                            <mat-divider></mat-divider><br>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label><i class="fas fa-clipboard-list"></i>&nbsp;Category de produit</label>
+                                    <select class="form-control" name="categoryId" [(ngModel)]="produit.categoryId" (change)="selectChangeHandler($event)">
+                                        <option value="" disabled="disabled" default="true"> Choisir...</option>
+                                        <option *ngFor="let Category of Categorys; " [value]="Category.id">{{
+                                            Category.categoryName }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label><i class="fas fa-clipboard-list"></i>&nbsp;Sous-catégorie de Produit</label>
+                                    <select class="form-control" name="sous-catégorie"
+                                        [(ngModel)]="produit.subCategoryId">
+                                        <option value="" disabled="disabled" default="true"> Choisir...</option>
+                                        <option *ngFor="let SubCategory of SubCategorys; " [value]="SubCategory.id">{{
+                                            SubCategory.subCategoryName }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Marque de produit</label>
+                                    <input type="text" list="acity" class="form-control" name="brand"
+                                        [(ngModel)]="produit.brand" required #brand="ngModel" />
+                                    <datalist id="acity">
+                                        <option selected disabled hidden> Choisir...</option>
+                                        <option>
+                                        </option>
+                                    </datalist>
+                                </div> <!-- form-group end.// -->
+                            </div>
+                            <br>
+                            <mat-divider></mat-divider><br>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label><i class="fab fa-product-hunt"></i>
+                                        SKU de Produit</label>
+                                    <input type="text" class="form-control" name="sku" required minlength="3"
+                                        maxlength="25" [(ngModel)]="produit.sku" />
+                                </div> <!-- form-group end.// -->
+                                <div class="form-group col-md-6">
+
+                                    <label><i class="fas fa-money-check-alt"></i>
+                                        Model de Produit</label>
+                                    <input type="text" class="form-control" name="model" required minlength="3"
+                                        maxlength="25" [(ngModel)]="produit.model" />
+                                </div> <!-- form-group end.// -->
+                            </div>
+                            <br>
+                            <mat-divider></mat-divider><br>
+                            <div class="form-row">
+
+                                <label><i class="fas fa-comment-alt" id="Commentaire"></i>&nbsp;description De
+                                    Produit</label>
+                                <textarea class="form-control" id="textarea" rows="4" cols="38"
+                                    (change)="remark($event)" [(ngModel)]="produit.details"></textarea>
+                            </div>
+                            <br>
+                            <mat-divider></mat-divider><br>
+                            <div class="form-row ">
+                                <div class="form-group col-md-4" class="aaaa">
+                                    <label class="poids"><i class="fas fa-weight-hanging"></i> Poids
+                                        &nbsp;</label>
+                                    <input type="text" placeholder=" kg" class="form-control" style="width: 50px;"
+                                        id="weight" name="weight" [(ngModel)]="produit.weight">
+                                </div>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <div class="form-group col-md-4" class="aaaa">
+                                    <label class="poids"><i class="fas fa-ruler-vertical"></i> Longueur
+                                        &nbsp;</label>
+                                    <input type="text" placeholder="cm" class="form-control" style="width: 50px;"
+                                        id="height" name="height" [(ngModel)]="produit.length">
+                                </div>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <div class="form-group col-md-4" class="aaaa">
+                                    <label class="poids"><i class="fas fa-weight-hanging"></i> Largeur
+                                        &nbsp;</label>
+                                    <input type="text" placeholder=" kg" class="form-control" style="width: 50px;"
+                                        id="weight" name="weight" [(ngModel)]="produit.width">
+                                </div>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <div class="form-group col-md-4" class="aaaa">
+                                    <label class="poids"><i class="fas fa-ruler-vertical"></i> Hauteur
+                                        &nbsp;</label>
+                                    <input type="text" placeholder="cm" class="form-control" style="width: 50px;"
+                                        id="height" name="height" [(ngModel)]="produit.height">
+                                </div>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <div class="form-group col-md-4" class="aaaa">
+                                    <label class="poids"><i class="fa-solid fa-fill-drip"></i> Couleur
+                                        &nbsp;</label>
+                                    <input type="text" class="form-control" style="width: 50px;" id="height"
+                                        name="height" [(ngModel)]="produit.color">
+                                </div>
+
+                            </div>
+                            <br>
+                            <mat-divider></mat-divider><br>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label><i class="fab fa-product-hunt"></i>
+                                        Praix de Produit</label>
+                                    <input type="text" class="form-control" name="price" required minlength="3"
+                                        maxlength="25" [(ngModel)]="produit.price" />
+                                </div> <!-- form-group end.// -->
+                                <div class="form-group col-md-6" class="aaaa"
+                                    style="padding-top: 25px; margin-left: 30px;">
+                                    <label class="poids"><i class="fas fa-sort-numeric-up"></i> Le quantite De Produit
+                                        &nbsp;</label>
+                                    <div class="input-group mb-3 input-spinner">
+                                        <div class="input-group-prepend">
+                                            <button class="btn btn-light" type="button" id="button-plus"
+                                                (click)="add()"> + </button>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{addr}}" id="numb"
+                                            [(ngModel)]="produit.totalStock" (change)="qut($event)">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-light" type="button" id="button-minus"
+                                                (click)="addnt()"> − </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <mat-divider></mat-divider><br>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <div class="container mt-5 text-center">
+                                        <h3 class="mb-5">Image de Produit</h3>
+                                        <div class="col-md-12">
+                                            <input #fileUploader type="file" multiple (change)="selectFiles($event)" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <mat-divider></mat-divider><br>
+                            <div>
+                                <img *ngFor='let preview of previews' [src]="preview" class="preview">
+                            </div>
+                            <br>
+                            <mat-divider></mat-divider><br>
+                            <div style="float:right;">
+                                <button id="nextBtn" class="btn btn-primary btn-block"
+                                    (click)="saveproduit()">Ajouter</button>
+                            </div>
+
+                        </form>
+                    </div> <!-- card-body.// -->
+                </div> <!-- card .// -->
+
+
+
+            </main>
+        </div>
+
+    </div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->

@@ -1,0 +1,172 @@
+<head>
+    <title>List-Livreur</title>
+</head>
+
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0 font-size-18">Table de Données</h4>
+
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li>Table</li>
+                                <li>&nbsp;Livreurs</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+
+
+
+                        <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="dataTables_length" id="datatable_length"></div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div id="datatable_filter" class="dataTables_filter"><label>Search:<input
+                                                type="search" class="form-control form-control-sm" placeholder=""
+                                                aria-controls="datatable" [(ngModel)]="query" id="listSearch"></label></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="datatable"
+                                        class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline"
+                                        role="grid" aria-describedby="datatable_info" style="width: 973px;">
+                                        <thead>
+                                            <tr role="row">
+                                                <th class="sorting_asc" tabindex="0" aria-controls="datatable"
+                                                    rowspan="1" colspan="1" style="width: 70px;" aria-sort="ascending"
+                                                    aria-label="Name: activate to sort column descending">Nom</th>
+                                                <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                                                    colspan="1" style="width: 80px;"
+                                                    aria-label="Position: activate to sort column ascending">Prenom</th>
+                                                <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                                                    colspan="1" style="width: 80px;"
+                                                    aria-label="Office: activate to sort column ascending">Email</th>
+                                                <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                                                    colspan="1" style="width: 30px;"
+                                                    aria-label="Age: activate to sort column ascending">Telephone</th>
+                                                <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                                                    colspan="1" style="width: 30px;"
+                                                    aria-label="Age: activate to sort column ascending">CIN</th>
+                                                <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                                                    colspan="1" style="width: 30px;"
+                                                    aria-label="Age: activate to sort column ascending">Etat</th>
+                                                <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                                                    colspan="1" style="width: 180px;"
+                                                    aria-label="Salary: activate to sort column ascending">Action</th>
+                                            </tr>
+                                        </thead>
+
+
+                                        <tbody>
+                                            <tr class="odd" *ngFor="let Livreur of livreurs | searchFilter: query | paginate
+                                            : {
+                                                itemsPerPage: tableSize,
+                                                currentPage: page,
+                                                totalItems: count
+                                              }; let i = index"
+                                                [class.active]="i == currentIndex">
+                                                <td class="sorting_1 dtr-control">{{Livreur.lastName}}</td>
+                                                <td>{{Livreur.firstName}}&nbsp;</td>
+                                                <td>{{Livreur.email}}</td>
+                                                <td>{{Livreur.phone}}</td>
+                                                <td><button (click)="open(Livreur.cinFront,Livreur.cinBack)">Verifier CIN</button></td>
+                                                <td *ngIf="Livreur.isActive"><strong>
+                                                        <p style="background-color: #94E185;">&nbsp; Activée</p>
+                                                    </strong> </td>
+                                                <td *ngIf="!Livreur.isActive"><strong>
+                                                        <p style="background-color: #C9404D;">&nbsp; Désactivée</p>
+                                                    </strong> </td>
+                                                <td><a class="btn btn-success" role="button"
+                                                    style="padding: 0.3rem 0.3rem !important; background-color: blue;"
+                                                    (click)="details(Livreur.id)">Details</a> &nbsp;
+                                                    <a class="btn btn-success" role="button"
+                                                        style="padding: 0.3rem 0.3rem !important;"
+                                                        (click)="enabled(Livreur.id)">Activer</a> &nbsp;<a
+                                                        class="btn btn-danger" role="button"
+                                                        style="padding: 0.3rem 0.3rem !important;"
+                                                        (click)="disabled(Livreur.id)">desactiver</a></td>
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <pagination-controls
+                                  previousLabel="Prev"
+                                  nextLabel="Next"
+                                  (pageChange)="onTableDataChange($event)"
+                                >
+                                </pagination-controls>
+                            
+                        </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div> <!-- end col -->
+        </div> <!-- end row -->
+
+
+    </div> <!-- container-fluid -->
+</div>
+<!-- End Page-content -->
+
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close" (click)="close()" style="float: right;">&times;</span><br>
+        <article class="card mb-4" style="height: 400px;">
+            <div class="table-responsive">
+        <img src="{{cinFrontURL}}"><br>
+        <img src="{{cinBackURL}}">
+            </div>
+        </article>
+
+
+    </div>
+
+</div>
+
+
+
+
+<div id="myModalII" class="modalII">
+
+    <!-- Modal content -->
+    <div class="modal-contentII">
+        <span class="close" (click)="close()" style="float: right;">&times;</span><br>
+        <article class="card mb-4" style="height: 400px;">
+            <div class="table-responsive">
+                <!--<th>Nom: </th><p>{{currentDelivery.lastName}}</p>  
+                <th>Prénom: </th><p>{{currentDelivery.firstName}}</p>  
+                <th>Email: </th><p>{{currentDelivery.email}}</p>  
+                <th>Téléphone: </th><p>{{currentDelivery.phone}}</p>  
+                <th>Nom: </th><p>{{currentDelivery.lastName}}</p>  
+                <th>Nom: </th><p>{{currentDelivery.lastName}}</p>  -->
+            </div>
+        </article>
+
+
+    </div>
+
+</div>

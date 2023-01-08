@@ -1,0 +1,214 @@
+<!-- ========================= SECTION PAGETOP ========================= -->
+<section class="section-pagetop bg-gray">
+  <div class="container">
+    <h2 class="title-page" style="text-align: center; font-size: 50PX;">Ajouter un<span
+        style="color: #FF6314;"> Demande de livraison</span></h2>
+  </div> <!-- container //  -->
+</section>
+<!-- ========================= SECTION PAGETOP END// ========================= -->
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+  <div class="container">
+    <div class="row">
+      <div class="sidenav">
+
+        <h1 class="title-page" id="APC">Mon compte</h1>
+        <mat-divider></mat-divider>
+        <a [routerLink]="['/profile-main']" id="a">Aperçu du compte</a>
+        <mat-divider></mat-divider>
+        <button class="list-group-item" id="b" class="dropdown-btn">Ordres
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+          <a [routerLink]="['/home']" id="a">Shop</a>
+          <mat-divider></mat-divider>
+          <a [routerLink]="['/list-orders']" id="a">Consulter Ordres</a>
+        </div>
+        <div *ngIf="currentUser.roles.includes('ROLE_USER') && currentUser.isActive">
+        <mat-divider></mat-divider>
+        <button class="list-group-item" id="b" class="dropdown-btn">Demande de livraison
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+          <a [routerLink]="['/add-demand']" id="a">Ajouter Demande</a>
+          <mat-divider></mat-divider>
+          <a [routerLink]="['/list-demand']" id="a">Consulter Demandes</a>
+          <mat-divider></mat-divider>
+          <a [routerLink]="['/offers']" id="a">Offres de livraison</a>
+          <mat-divider></mat-divider>
+          <a [routerLink]="['/requests-send']" id="a">Invitation envoyée</a>
+        </div>
+      </div>
+        <div *ngIf="currentUser.roles.includes('ROLE_DELIVERY') && currentUser.isActive">
+          <mat-divider></mat-divider>
+          <button class="list-group-item" id="b" class="dropdown-btn">Offre de livraison
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-container">
+            <a [routerLink]="['/add-offer']" id="a">Ajouter Offre</a>
+            <mat-divider></mat-divider>
+            <a [routerLink]="['/list-offer']" id="a">Consulter Offres</a>
+            <mat-divider></mat-divider>
+            <a [routerLink]="['/requests']" id="a">Invitation réussie </a>
+            <mat-divider></mat-divider>
+          </div>
+        </div>
+        <div  *ngIf="currentUser.roles.includes('ROLE_USER_PRO') && currentUser.isActive">
+          <mat-divider></mat-divider>
+          <button class="list-group-item" id="b" class="dropdown-btn">Magasin
+              <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-container">
+              <a [routerLink]="['/card']" id="a">Aperçu du Carte Pro</a>
+              <mat-divider></mat-divider>
+              <a [routerLink]="['/add-product']" id="a">Ajouter Produit</a>
+              <mat-divider></mat-divider>
+              <a [routerLink]="['/list-product']" id="a">Consulter produit</a>
+              <mat-divider></mat-divider>
+          </div>
+      </div>
+        <mat-divider></mat-divider>
+        <a [routerLink]="['/']" id="a">Paramètre</a>
+        <mat-divider></mat-divider>
+        <a [routerLink]="['/']" id="a">Déconnecter</a>
+        <mat-divider></mat-divider>
+
+
+      </div>
+      <main class="col-md-9">
+
+        <div class="card">
+          <div class="card-body">
+            <form>
+              <div class="col-md-9" style="margin: auto;
+                padding: 10px;">
+
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label><i class="fas fa-arrow-alt-circle-right"></i>&nbsp;Gouvernorat de Départ</label>
+                    <select class="form-control" name="gov" [(ngModel)]="demand.departGov" required #gov="ngModel"
+                      (change)="selectChangeHandler($event)">
+                      <option value="" disabled="disabled" default="true"> Choisir...</option>
+                      <option *ngFor="let Governorate of Governorates; " [value]="Governorate.govName">{{
+                        Governorate.govName }}
+                      </option>
+                    </select>
+
+                  </div> <!-- form-group end.// -->
+                  <div class="form-group col-md-6">
+                    <label><i class="fas fa-arrow-alt-circle-right"></i>&nbsp;Ville de Départ</label>
+                    <select class="form-control" name="city" [(ngModel)]="demand.departAdr" required #city="ngModel">
+                      <option value="" disabled="disabled" default="true"> Choisir...</option>
+                      <option *ngFor="let city of Citys; " [value]="city.cityName">{{ city.cityName }}
+                      </option>
+                    </select>
+                  </div> <!-- form-group end.// -->
+                </div> <!-- form-row.// --><br>
+                <mat-divider></mat-divider><br>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label><i class="fas fa-pause-circle"></i>&nbsp;Gouvernorat de Destination</label>
+                    <select class="form-control" name="gov" [(ngModel)]="demand.arriGov" required #gov="ngModel"
+                      (change)="selectChangeHandlerII($event)">
+                      <option value="" disabled="disabled" default="true"> Choisir...</option>
+                      <option *ngFor="let Governorate of Governorates; " [value]="Governorate.govName">{{
+                        Governorate.govName }}
+                      </option>
+                    </select>
+
+                  </div> <!-- form-group end.// -->
+                  <div class="form-group col-md-6">
+                    <label><i class="fas fa-pause-circle"></i>&nbsp;Ville de Destination</label>
+                    <select class="form-control" name="city" [(ngModel)]="demand.arriAdr" required #city="ngModel">
+                      <option value="" disabled="disabled" default="true"> Choisir...</option>
+                      <option *ngFor="let city of CitysII; " [value]="city.cityName">{{ city.cityName }}
+                      </option>
+                    </select>
+                  </div> <!-- form-group end.// -->
+                </div> <!-- form-row.// --><br>
+                <mat-divider></mat-divider><br>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label><i class="fas fa-clipboard-list"></i>&nbsp;Type Demande</label>
+
+                    <select class="form-control" id="type" required [(ngModel)]="demand.type" name="type"
+                      (change)="selectChangeHandler2($event)">
+                      <option value="" disabled="disabled" default="true">Choisir...</option>
+                      <option value="colis">colis</option>
+                      <option value="enveloppe">enveloppe</option>
+                    </select>
+                  </div> <!-- form-group end.// -->
+                  <div class="form-group col-md-6">
+                    <label><i class="fas fa-phone"></i>&nbsp;Tel-receiver</label>
+                    <input type="text" class="form-control" placeholder="+216" id="tel_receiver"
+                      [(ngModel)]="demand.tel_receiver" name="tel_receiver">
+                  </div>
+                </div> <!-- form-group end.// -->
+                <br>
+                <mat-divider></mat-divider><br>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label><i class="fa fa-calendar" aria-hidden="true" id="mat"></i>&nbsp;La date de réception </label>
+   
+                      <input type="date" class="form-control" placeholder="Choisissez une date" id="date" name="date"
+                        [(ngModel)]="demand.date">
+                  </div>
+                  <div class="form-group col-md-6">
+
+                    <label><i class="fas fa-comment-alt" id="Commentaire"></i>&nbsp;Commentaire</label>
+                    <textarea class="form-control" id="remark" name="remark" rows="1" cols="38"
+                      [(ngModel)]="demand.remark"></textarea>
+                  </div>
+
+                  <!-- form-group end.// -->
+                </div> <!-- form-row.// --><br>
+                <mat-divider></mat-divider><br>
+
+
+                <div class="form-row ">
+                  <label class="poids"><i class="fas fa-weight-hanging"></i> Le Poids De Coli &nbsp;</label>
+                  <input type="text" placeholder=" kg" class="form-control" style="width: 50px;" id="weight"
+                    [(ngModel)]="demand.weight" name="weight">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
+
+                  <label class="poids"><i class="fas fa-ruler-vertical"></i> Le Hauteur De Coli &nbsp;</label>
+                  <input type="text" placeholder="cm" class="form-control" style="width: 50px;" id="height"
+                    [(ngModel)]="demand.height" name="height">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
+                  <label class="poids"><i class="fas fa-ruler-horizontal"></i> Le Longueur De Coli &nbsp;</label>
+                  <input type="text" placeholder="cm" class="form-control" style="width: 50px;" id="length"
+                    [(ngModel)]="demand.length" name="length">
+
+                </div> <!-- form-row.// -->
+                <br>
+                <mat-divider></mat-divider><br>
+                <div class="form-row">
+                  <label class="hoverable" for="fileInput">
+                    <img
+                      [src]="url ? url : 'https://img.freepik.com/vecteurs-libre/icones-livraison-isoles-boites-carton-colis_33099-828.jpg?t=st=1650642851~exp=1650643451~hmac=634c87ef353d2d77bedcaabb8b5c63ab81def9a9cb158177798626b34a114e83&w=740'">
+                    <div class="hover-text">Sélectionner une image de colis (PNG, JPG)</div>
+                    <div class="background"></div>
+                  </label>
+                  <br />
+                  <input id="fileInput" type='file' accept=".jpg, .jpeg, .png" (change)="selectFile($event)">
+                </div>
+                <br>
+                <mat-divider></mat-divider><br>
+                <button class="btn btn-primary" (click)="saveDemand()">Save</button>
+
+                <br><br><br><br><br><br>
+
+              </div> <!-- col.// -->
+              <!-- col.// -->
+
+            </form>
+          </div> <!-- card-body.// -->
+        </div> <!-- card .// -->
+
+
+
+      </main>
+    </div>
+
+  </div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->

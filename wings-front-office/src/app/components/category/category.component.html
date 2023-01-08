@@ -1,0 +1,112 @@
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+    <div class="container">
+
+
+        <!-- ============================  FILTER TOP  ================================= -->
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="row">
+                   
+                    <nav class="col-md-8">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
+                            <li class="breadcrumb-item"><a  routerLink="/Category/{{category}}">{{category}}</a></li>
+                        </ol>
+                    </nav> <!-- col.// -->
+                </div> <!-- row.// -->
+                
+            </div> <!-- card-body .// -->
+        </div> <!-- card.// -->
+        <!-- ============================ FILTER TOP END.// ================================= -->
+
+        <header class="mb-3">
+            <div class="form-inline">
+                <strong class="mr-md-auto">32 Items found </strong>
+            </div>
+        </header><!-- sect-heading -->
+
+        <div class="row">
+            <div class="col-md-3" *ngFor="let product of Products | paginate
+            : {
+                itemsPerPage: tableSize,
+                currentPage: page,
+                totalItems: count
+              };">
+                <figure class="card card-product-grid">
+                    <div class="img-wrap">
+                        
+                        <a routerLink="/productItem/{{product.product.id}}%{{product.product.name}}"><img src="{{product.product.picture1}}"></a>
+                    </div> <!-- img-wrap.// -->
+                    <figcaption class="info-wrap">
+                        <a routerLink="/productItem/{{product.product.id}}%{{product.product.name}}" class="title mb-2">{{product.product.name}}</a>
+                        <div class="price-wrap">
+                            <span class="price">{{product.price}} TND</span>
+                            <small class="text-muted">/par item</small>
+                        </div> <!-- price-wrap.// -->
+                        <p class="text-muted ">{{product.product.details | slice:0:70}}...</p>
+
+                        <hr>
+
+                        <p class="mb-3">
+                            <span class="tag"> <i class="fa fa-check"></i> Verified</span>
+                            <span class="tag"> 2 Years </span>
+                            <span class="tag"> 23 reviews </span>
+                            <span class="tag"> Japan </span>
+                        </p>
+
+                       
+
+                        <a href="#" class="btn btn-outline-primary"> <i class="fa fa-envelope"></i> Contact supplier
+                        </a>
+
+                    </figcaption>
+                </figure>
+            </div> <!-- col.// -->
+        </div> <!-- row end.// -->
+
+
+      
+        <div class="d-flex justify-content-center">
+            <pagination-controls 
+            previousLabel="Prev"
+            nextLabel="Next"
+            (pageChange)="onTableDataChange($event)"
+          >
+            </pagination-controls>
+        </div>
+
+
+        
+
+    </div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+
+
+<!-- ========================= SECTION SUBSCRIBE  ========================= -->
+<section class="padding-y-lg bg-light border-top">
+    <div class="container">
+
+        <p class="pb-2 text-center">Fournir les dernières tendances de produits et les nouvelles de l'industrie directement dans votre boîte de réception</p>
+
+        <div class="row justify-content-md-center">
+            <div class="col-lg-4 col-sm-6">
+                <form class="form-row">
+                    <div class="col-8">
+                        <input class="form-control" placeholder="Your Email" type="email">
+                    </div> <!-- col.// -->
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-block btn-warning"> <i class="fa fa-envelope"></i>
+                            S'abonner </button>
+                    </div> <!-- col.// -->
+                </form>
+                <small class="form-text">Nous ne partagerons jamais votre adresse e-mail avec un tiers. </small>
+            </div> <!-- col-md-6.// -->
+        </div>
+
+
+    </div>
+</section>
+<!-- ========================= SECTION SUBSCRIBE END// ========================= -->

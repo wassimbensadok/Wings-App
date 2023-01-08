@@ -1,0 +1,160 @@
+<section class="section-pagetop bg-gray">
+  <div class="container">
+    <h2 class="title-page" style="text-align: center; font-size: 50PX;">Consulter <span
+        style="color: #FF6314;">Demandes</span></h2>
+  </div> <!-- container //  -->
+</section>
+<section class="section-content padding-y">
+  <div class="container">
+    <div class="row">
+      <div class="sidenav">
+
+        <h1 class="title-page" id="APC">Mon compte</h1>
+        <mat-divider></mat-divider>
+        <a [routerLink]="['/profile-main']" id="a">Aperçu du compte</a>
+        <mat-divider></mat-divider>
+        <button class="list-group-item" id="b" class="dropdown-btn">Ordres
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+          <a [routerLink]="['/home']" id="a">Shop</a>
+          <mat-divider></mat-divider>
+          <a [routerLink]="['/list-orders']" id="a">Consulter Ordres</a>
+        </div>
+        <div *ngIf="currentUser.roles.includes('ROLE_USER') && currentUser.isActive">
+        <mat-divider></mat-divider>
+        <button class="list-group-item" id="b" class="dropdown-btn">Demande de livraison
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+          <a [routerLink]="['/add-demand']" id="a">Ajouter Demande</a>
+          <mat-divider></mat-divider>
+          <a [routerLink]="['/list-demand']" id="a">Consulter Demandes</a>
+          <mat-divider></mat-divider>
+          <a [routerLink]="['/offers']" id="a">Offres de livraison</a>
+          <mat-divider></mat-divider>
+          <a [routerLink]="['/requests-send']" id="a">Invitation envoyée</a>
+        </div>
+      </div>
+        <div *ngIf="currentUser.roles.includes('ROLE_DELIVERY') && currentUser.isActive">
+          <mat-divider></mat-divider>
+          <button class="list-group-item" id="b" class="dropdown-btn">Offre de livraison
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-container">
+            <a [routerLink]="['/add-offer']" id="a">Ajouter Offre</a>
+            <mat-divider></mat-divider>
+            <a [routerLink]="['/list-offer']" id="a">Consulter Offres</a>
+            <mat-divider></mat-divider>
+            <a [routerLink]="['/requests']" id="a">Invitation réussie </a>
+            <mat-divider></mat-divider>
+          </div>
+        </div>
+        <div  *ngIf="currentUser.roles.includes('ROLE_USER_PRO') && currentUser.isActive">
+          <mat-divider></mat-divider>
+          <button class="list-group-item" id="b" class="dropdown-btn">Magasin
+              <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-container">
+              <a [routerLink]="['/card']" id="a">Aperçu du Carte Pro</a>
+              <mat-divider></mat-divider>
+              <a [routerLink]="['/add-product']" id="a">Ajouter Produit</a>
+              <mat-divider></mat-divider>
+              <a [routerLink]="['/list-product']" id="a">Consulter produit</a>
+              <mat-divider></mat-divider>
+          </div>
+      </div>
+        <mat-divider></mat-divider>
+        <a [routerLink]="['/']" id="a">Paramètre</a>
+        <mat-divider></mat-divider>
+        <a [routerLink]="['/']" id="a">Déconnecter</a>
+        <mat-divider></mat-divider>
+
+
+      </div>
+      <!-- col.// -->
+      <main class="col-md-9">
+        <div class="card mb-3">
+          <div class="card-body">
+            <!-- row.// -->
+
+            <div class="row">
+              <div class="col-md-2">Filtrer par</div> <!-- col.// -->
+              <div class="col-md-10">
+                <ul class="list-inline">
+                  <li class="list-inline-item mr-3">
+                    <div class="form-inline">
+                      <label class="mr-2">Destination: </label>
+                      <label><i class="fas fa-pause-circle"></i>&nbsp;Gouvernorat </label>
+                    <select class="form-control" name="currentGov" 
+                      (change)="selectChangeHandlerII($event)">
+                      <option value="" disabled="disabled" default="true"> Choisir...</option>
+                      <option *ngFor="let Governorate of Governorates; " [value]="Governorate.govName">{{
+                        Governorate.govName }}
+                      </option>
+                    </select>
+                    <label style="margin-left: 20px;"><i class="fas fa-pause-circle"></i>&nbsp; Ville </label>
+                    <select class="form-control" name="city" >
+                      <option value="" disabled="disabled" default="true"> Choisir...</option>
+                      <option *ngFor="let city of Citys; " [value]="city.cityName">{{ city.cityName }}
+                      </option>
+                    </select>
+                    </div>
+                  </li>
+                  <button type="submit" class="btn btn-sm btn-light ml-2" (click)="ok()">Ok</button>
+                </ul>
+              </div> <!-- col.// -->
+            </div> <!-- row.// -->
+          </div> <!-- card-body .// -->
+        </div>
+        <article class="card mb-4">
+
+          <!-- card-body .// -->
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <tbody>
+                <tr *ngFor="let demand of demands | paginate
+          : {
+              itemsPerPage: tableSize,
+              currentPage: page,
+              totalItems: count
+            }; let i = index" [class.active]="i == currentIndex">
+                  <td width="65">
+                    <img src="{{demand.fileURL}}" class="img-xs border">
+                  </td>
+                  <td>
+                    <p class="title mb-0">{{ demand.type }} </p>
+                    <var class="price text-muted">{{ demand.tel_receiver }}</var>
+                  </td>
+                  <td> {{ demand.destination }} <br> {{ demand.etatdemand }} </td>
+                  <td width="250"> <a  class="btn btn-outline-primary" *ngIf="demand.etatdemand === 'pending'" style="margin-right: 5px;">Supprimé</a>
+                    <a  class="btn btn-outline-primary" *ngIf="demand.etatdemand === 'processed'" aria-readonly="true"  style="margin-right: 5px;">Supprimé</a>
+                    <div class="dropdown d-inline-block">
+                      <a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-outline-secondary"
+                        aria-expanded="false">More</a>
+                      <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end"
+                        style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(76px, 38px, 0px);">
+                        <a [routerLink]="['/modifier-demande']" [state]="demand" class="dropdown-item">Modifier</a>
+                        <a href="#" class="dropdown-item">Annuler</a>
+                      </div>
+                    </div> <!-- dropdown.// -->
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div> <!-- table-responsive .end// -->
+          <div class="d-flex justify-content-center">
+            <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+            </pagination-controls>
+          </div>
+        </article> <!-- card order-item .// -->
+
+
+
+
+      </main>
+    </div>
+
+  </div> <!-- container .//  -->
+</section>

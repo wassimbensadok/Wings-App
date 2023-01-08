@@ -1,0 +1,168 @@
+
+<!-- ========================= SECTION PAGETOP ========================= -->
+<section class="section-pagetop bg-gray">
+    <div class="container">
+      <h2 class="title-page" style="text-align: center; font-size: 50PX;">Liste de <span style="color: #FF6314;">Produit</span></h2>
+    </div> <!-- container //  -->
+    </section>
+  <!-- ========================= SECTION PAGETOP END// ========================= -->
+  
+  <!-- ========================= SECTION CONTENT ========================= -->
+  <section class="section-content padding-y">
+    <div class="container">
+      <div class="row">
+        <div class="sidenav">
+
+          <h1 class="title-page" id="APC">Mon compte</h1>
+          <mat-divider></mat-divider>
+          <a [routerLink]="['/profile-main']" id="a">Aperçu du compte</a>
+          <mat-divider></mat-divider>
+          <button class="list-group-item" id="b" class="dropdown-btn">Ordres
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-container">
+            <a [routerLink]="['/home']" id="a">Shop</a>
+            <mat-divider></mat-divider>
+            <a [routerLink]="['/list-orders']" id="a">Consulter Ordres</a>
+          </div>
+          <div *ngIf="currentUser.roles.includes('ROLE_USER') && currentUser.isActive">
+          <mat-divider></mat-divider>
+          <button class="list-group-item" id="b" class="dropdown-btn">Demande de livraison
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-container">
+            <a [routerLink]="['/add-demand']" id="a">Ajouter Demande</a>
+            <mat-divider></mat-divider>
+            <a [routerLink]="['/list-demand']" id="a">Consulter Demandes</a>
+            <mat-divider></mat-divider>
+            <a [routerLink]="['/offers']" id="a">Offres de livraison</a>
+            <mat-divider></mat-divider>
+            <a [routerLink]="['/requests-send']" id="a">Invitation envoyée</a>
+          </div>
+        </div>
+          <div *ngIf="currentUser.roles.includes('ROLE_DELIVERY') && currentUser.isActive">
+            <mat-divider></mat-divider>
+            <button class="list-group-item" id="b" class="dropdown-btn">Offre de livraison
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+              <a [routerLink]="['/add-offer']" id="a">Ajouter Offre</a>
+              <mat-divider></mat-divider>
+              <a [routerLink]="['/list-offer']" id="a">Consulter Offres</a>
+              <mat-divider></mat-divider>
+              <a [routerLink]="['/requests']" id="a">Invitation réussie </a>
+              <mat-divider></mat-divider>
+            </div>
+          </div>
+          <div  *ngIf="currentUser.roles.includes('ROLE_USER_PRO') && currentUser.isActive">
+            <mat-divider></mat-divider>
+            <button class="list-group-item" id="b" class="dropdown-btn">Magasin
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a [routerLink]="['/card']" id="a">Aperçu du Carte Pro</a>
+                <mat-divider></mat-divider>
+                <a [routerLink]="['/add-product']" id="a">Ajouter Produit</a>
+                <mat-divider></mat-divider>
+                <a [routerLink]="['/list-product']" id="a">Consulter produit</a>
+                <mat-divider></mat-divider>
+            </div>
+        </div>
+          <mat-divider></mat-divider>
+          <a [routerLink]="['/']" id="a">Paramètre</a>
+          <mat-divider></mat-divider>
+          <a [routerLink]="['/']" id="a">Déconnecter</a>
+          <mat-divider></mat-divider>
+  
+  
+        </div>
+        <main class="col-md-9">
+  
+          <div class="card"  >
+              <div class="card-body">
+                <form >
+                    <div class="form-inline">
+                        <strong class="mr-md-auto">{{produits.length}} Items found </strong>
+                        <select class="mr-2 form-control" [(ngModel)]="filter">
+                            <option>Derniers articles</option>
+                            <option>Tendance</option>
+                        </select>
+                    
+                    </div>
+                    <br>
+                    <article class="card card-product-list" *ngFor="let produit of produits | paginate
+                    : {
+                        itemsPerPage: tableSize,
+                        currentPage: page,
+                        totalItems: count
+                      }; let i = index"
+                    [class.active]="i == currentIndex">
+                        <div class="row no-gutters">
+                            <aside class="col-md-3">
+                                <a href="#" class="img-wrap">
+                                    <img src="{{produit.product.picture1}}">
+                                </a>
+                            </aside> <!-- col.// -->
+                            <div class="col-md-6">
+                                <div class="info-main">
+                                    <div class="h4 title">{{produit.product.name}}  </div>
+                                  
+                                
+                                    <div class="mx-auto" class="aa">
+                                        <span class="tag"><i class="fa fa-cubes" aria-hidden="true"></i> stock: {{produit.productStock}} peer </span> 
+                                        <span class="tag"><i class="fas fa-ruler-vertical"></i>  hauteur :{{produit.height}} cm </span> 
+                                        <span class="tag"><i class="fas fa-weight-hanging"></i> poids :{{produit.weight}} kg </span>
+                                    
+                                    </div>
+                                    <br>
+                                    <div class="h6">Description: </div>
+                                  
+                                    <div class="p">{{produit.product.details | slice:0:150}}...</div>
+                    
+                                </div> <!-- info-main.// -->
+                            </div> <!-- col.// -->
+                            <aside class="col-sm-3">
+                                <div class="info-aside">
+                                    <div class="price-wrap">
+                                        <span class="h5 price">{{produit.price}}TND</span> 
+                                        <small class="text-muted">/per item</small>
+                                    </div> <!-- price-wrap.// -->
+                                    <small class="text-warning"></small>
+                                    
+                                   
+                                    <div class="mt-3">
+                                        <a routerLink="/modify-product/{{produit.id}}" class="btn btn-outline-primary"> <i class="far fa-edit"></i> editer </a> &nbsp;
+                                        <a (click)="DeletePro(produit.product.id)" class="btn btn-light"><i class="far fa-trash-alt"></i> suprimer </a>
+                                    </div>
+                                   </div> <!-- info-aside.// -->
+                            </aside> <!-- col.// -->
+                        </div> <!-- row.// -->
+                    </article>
+                 
+                  
+               
+                 </form>
+                
+                 </div> <!-- card-body.// -->
+                 
+                 <br><mat-divider></mat-divider><br>
+                 <div class="d-flex justify-content-center">
+                  <pagination-controls 
+                  previousLabel="Prev"
+                  nextLabel="Next"
+                  (pageChange)="onTableDataChange($event)"
+                >
+                  </pagination-controls>
+              </div>
+               </div> <!-- card .// -->
+               
+               
+                 </main>
+         </div>
+     
+       </div> <!-- container .//  -->
+     </section>
+     <!-- ========================= SECTION CONTENT END// ========================= -->
+     
+     
+   

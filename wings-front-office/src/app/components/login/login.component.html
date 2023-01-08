@@ -1,0 +1,89 @@
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-conten padding-y" style="min-height:84vh">
+
+    <!-- ============================ COMPONENT LOGIN   ================================= -->
+        <div class="card mx-auto" style="max-width: 380px; margin-top:100px;">
+          <div class="card-body">
+          <h4 class="card-title mb-4">Sign in</h4>
+          <form 
+          *ngIf="!isLoggedIn"
+          name="form"
+          (ngSubmit)="f.form.valid && onSubmit()"
+          #f="ngForm"
+          novalidate
+          >
+                <button (click)="FacebookLogin()" class="btn btn-facebook btn-block mb-2"> <i class="fab fa-facebook-f"></i> Sign in with Facebook</button>
+                <button (click)="GoogleLogin()" class="btn btn-google btn-block mb-4"> <i class="fab fa-google"></i> Sign in with Google</button>
+              <div class="form-group">
+                 <input 
+                  class="form-control" 
+                  placeholder="Email" 
+                  type="text"
+                  name="email"
+                  [(ngModel)]="form.email"
+                  required
+                  #email="ngModel"
+                />
+              </div> <!-- form-group// -->
+              <div class="form-group">
+                <div class="form-group inner-addon right-addon">
+                  <div>
+                    <i alt="show" class="far fa-eye eye-show" 
+                    (click)="showPassword = !showPassword"
+                    [class.hide]="showPassword"></i>
+                    <i alt="hide" class="far fa-eye-slash eye-hide" 
+                    (click)="showPassword = !showPassword"
+                    [class.hide]="!showPassword"></i>
+                  
+                  </div>
+                  <input type="password" class="form-control" name="password"
+                  [(ngModel)]="form.password"
+                  required
+                  minlength="6"
+                  #password="ngModel" placeholder="Password"
+                  [type]="showPassword ? 'text' : 'password'"
+                  />
+                
+                  <div
+                  class="alert alert-danger"
+                  role="alert"
+                  *ngIf="password.errors && f.submitted"
+                  >
+                  <div *ngIf="password.errors['required']">Password is required</div>
+                    <div *ngIf="password.errors['minlength']">
+                     Password must be at least 6 characters
+                    </div>
+                  </div>
+                </div>
+            
+              </div> <!-- form-group// -->
+              
+              <div class="form-group">
+                  <a href="#" class="float-right">Mot de passe oublié?</a> 
+               
+              </div> <!-- form-group form-check .// -->
+              <div class="form-group">
+                  <button type="submit" class="btn btn-primary btn-block"> Login  </button>
+              </div> <!-- form-group// -->  
+              <div class="form-group">
+                <div
+                  class="alert alert-danger"
+                  role="alert"
+                  *ngIf="f.submitted && isLoginFailed"
+                >
+                  Login failed: {{ errorMessage }}
+                </div>
+              </div>  
+          </form>
+          
+          </div> <!-- card-body.// -->
+        </div> <!-- card .// -->
+    
+         <p class="text-center mt-4">Vous n'avez pas de compte ?<a href="/user-register"  routerLink="/register"> S'inscrire</a></p>
+         <br><br>
+    <!-- ============================ COMPONENT LOGIN  END.// ================================= -->
+    
+    
+</section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->

@@ -1,0 +1,96 @@
+<div class="main-content">
+  <div class="page-content">
+
+    <div class="container-fluid">
+
+      <!-- start page title -->
+      <div class="row">
+        <div class="col-12">
+          <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18">Ajouter Administrateurs</h4>
+
+            <div class="page-title-right">
+              <ol class="breadcrumb m-0">
+                <li>Gérer Admin</li>
+                <li> /Ajouter Admin</li>
+              </ol>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- end page title -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <form>
+
+
+                <div class="mb-3 row">
+                  <label for="Nom" class="col-md-2 col-form-label">Nom</label>
+                  <div class="col-md-10">
+                    <input class="form-control" type="text" placeholder="Entrée Le Nom de personnel"
+                      id="example-text-input" [(ngModel)]="admin.nom" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+
+                <div class="mb-3 row">
+                  <label for="Prenom" class="col-md-2 col-form-label">Prenom</label>
+                  <div class="col-md-10">
+                    <input class="form-control" type="text" placeholder="Entrée Le Prenom de personnel"
+                      id="example-text-input" [(ngModel)]="admin.prenom" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+
+
+                <div class="mb-3 row">
+                  <label for="email" class="col-md-2 col-form-label">Email</label>
+                  <div class="col-md-10">
+                    <input class="form-control" type="email" placeholder="Entrée l'Email de personnel"
+                      id="example-email-input" [(ngModel)]="admin.email" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+
+                <div class="mb-3 row">
+                  <label for="telephne" class="col-md-2 col-form-label">Telephone</label>
+                  <div class="col-md-10">
+                    <input class="form-control" type="tel" placeholder="Entrée Le Telephone de personnel"
+                      id="example-tel-input" value="aaa" [(ngModel)]="admin.tel" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+                <div class="mb-3 row">
+                  <label for="password" class="col-md-2 col-form-label">Password</label>
+                  <div class="col-md-10">
+                    <input class="form-control" type="password" placeholder="Entrée  Le Mot De passe de personnel"
+                      id="example-password-input" [(ngModel)]="admin.password" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+                <label>Type</label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1"
+                    [(ngModel)]="admin.typee" [ngModelOptions]="{standalone: true}" (change)="type($event)">
+                  <label class="form-check-label" for="inlineRadio1">Administrateur</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="2"
+                    [(ngModel)]="admin.typee" [ngModelOptions]="{standalone: true}" (change)="type($event)">
+                  <label class="form-check-label" for="inlineRadio2">Agent</label>
+                </div>
+                <br>
+                <br>
+
+                <button class="btn btn-primary" type="submit" style="position:relative; left:800px !important;"
+                  (click)="ajout()">Ajouter</button>
+
+              </form>
+            </div>
+          </div>
+        </div> <!-- end col -->
+      </div>
+      <!-- end row -->
+    </div>
+  </div>
+</div>
+<notifier-container></notifier-container>

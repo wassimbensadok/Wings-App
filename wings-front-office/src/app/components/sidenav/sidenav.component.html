@@ -1,0 +1,47 @@
+
+        <h1 class="title-page" id="APC">Mon compte</h1>
+        <mat-divider></mat-divider>
+        <a [routerLink]="['/profile-main']" id="a">Aperçu du compte</a>
+        <mat-divider></mat-divider>
+        <button class="list-group-item" id="b" class="dropdown-btn">Ordres
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+          <a [routerLink]="['/']" id="a">Shop</a>
+          <mat-divider></mat-divider>
+          <a [routerLink]="['/']" id="a">Consulter Ordres</a>
+        </div>
+        <mat-divider></mat-divider>
+        <button class="list-group-item" id="b" class="dropdown-btn">Demande de livraison
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+          <a [routerLink]="['/add-demand']" id="a">Ajouter Demande</a>
+          <mat-divider></mat-divider>
+          <a [routerLink]="['/list-demand']" id="a">Consulter Demandes</a>
+          <mat-divider></mat-divider>
+          <a [routerLink]="['/offers']" id="a">Offres de livraison</a>
+          <mat-divider></mat-divider>
+          <a [routerLink]="['/requests-send']" id="a">Invitation envoyée</a>
+        </div>
+        <div *ngIf="currentUser.roles[1] == 'ROLE_DELIVERY'">
+        <mat-divider></mat-divider>
+        <button class="list-group-item" id="b" class="dropdown-btn">Offre de livraison
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+          <a [routerLink]="['/add-offer']" id="a">Ajouter Offre</a>
+          <mat-divider></mat-divider>
+          <a [routerLink]="['/list-offer']" id="a">Consulter Offres</a>
+          <mat-divider></mat-divider>
+          <a [routerLink]="['/requests']" id="a">Invitation réussie </a>
+          <mat-divider></mat-divider>
+        </div>
+      </div>
+        <mat-divider></mat-divider>
+        <a [routerLink]="['/']" id="a">Paramètre</a>
+        <mat-divider></mat-divider>
+        <a [routerLink]="['/']" id="a">Déconnecter</a>
+        <mat-divider></mat-divider>
+
+      

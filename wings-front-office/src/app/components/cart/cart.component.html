@@ -1,0 +1,107 @@
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+    <div class="container">
+
+        <div class="row">
+            <main class="col-md-9">
+
+                <div *ngIf="!myOrderItems$">
+                    <img style="margin-left: 500px;" class="-mvs"
+                        src="https://www.jumia.com.tn/assets_he/images/cart.668e6453.svg" height="100" width="100"
+                        alt="">
+                    <h2 style="margin-left: 460px;" class="-pvs -fs16 -m">Votre panier est vide!</h2>
+                    <p style="margin-left: 370px;" class="-pvs -ws-pl -lh-15">Parcourez nos catégories et découvrez nos
+                        meilleures offres!</p><a style="margin-left: 450px;" href="/" class="btn _prim -mtl">Commencez
+                        vos achats</a>
+                </div>
+
+
+                <div class="card" *ngIf="myOrderItems$">
+
+                    <table class="table table-borderless table-shopping-cart">
+                        <thead class="text-muted">
+                            <tr class="small text-uppercase">
+                                <th scope="col">Produit</th>
+                                <th scope="col" width="120">Quantité</th>
+                                <th scope="col" width="120">Prix</th>
+                                <th scope="col" class="text-right" width="200"> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of myOrderItems$">
+                                <td>
+                                    <figure class="itemside">
+                                        <div class="aside"><img [src]="item.product.image" class="img-sm"></div>
+                                        <figcaption class="info"><br>
+                                            <a href="#" class="title text-dark">{{item.product.name}}</a>
+                                        </figcaption>
+                                    </figure>
+                                </td>
+                                <td>
+                                    <input type="number" [defaultValue]="item.quantity" class="form-control" min="1"
+                                        step="1" id="quantity" name="quantity"
+                                        (input)="onSearchChange($event,item.product.id,item.product.name,item.product.price,item.product.image)" />
+                                </td>
+                                <td>
+                                    <div class="price-wrap">
+                                        <var class="price">{{item.quantity * item.product.price | currency : 'TND
+                                            '}}</var>
+                                        <small class="text-muted"> {{item.product.price | currency : 'TND '}} </small>
+                                    </div> <!-- price-wrap .// -->
+                                </td>
+                                <td class="text-right">
+                                    <a data-original-title="Save to Wishlist" title="" href="#" class="btn btn-light"
+                                        data-toggle="tooltip"> <i class="fa fa-heart"></i></a>
+                                    <button href="#" class="btn btn-light"
+                                        (click)="deleteItem(item.product.id,item.product.name,item.product.price,item.product.image)">
+                                        Retirer</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="card-body border-top">
+
+                        <a (click)="Command()" class="btn btn-primary float-md-right"> Faire un achat <i
+                                class="fa fa-chevron-right"></i> </a>
+
+                        <a href="#" class="btn btn-light"> <i class="fa fa-chevron-left"></i> Continuer vos achats </a>
+                        <a class="btn btn-light" (click)="clearitem()"> vider le panier </a>
+                    </div>
+                </div> <!-- card.// -->
+
+                <div class="alert alert-success mt-3" *ngIf="myOrderItems$">
+                    <p class="icontext"><i class="icon text-success fa fa-truck"></i> Livraison gratuite sous 1 à 2
+                        semaines</p>
+                </div>
+
+            </main> <!-- col.// -->
+            <aside class="col-md-3" *ngIf="myOrderItems$">
+
+                <div class="card">
+                    <div class="card-body">
+                        <dl class="dlist-align">
+                            <dt>Prix ​​total:</dt>
+                            <dd class="text-right">{{TotalPrice | currency : 'TND '}}</dd>
+                        </dl>
+                        <dl class="dlist-align">
+                            <dt>Remise:</dt>
+                            <dd class="text-right">-5%</dd>
+                        </dl>
+                        <dl class="dlist-align">
+                            <dt>Total:</dt>
+                            <dd class="text-right  h5"><strong>{{Total | currency : 'TND '}}</strong></dd>
+                        </dl>
+                        <hr>
+                        <p class="text-center mb-3">
+                            <img src="../../../assets/images/misc/payments.png" height="26">
+                        </p>
+
+                    </div> <!-- card-body.// -->
+                </div> <!-- card .// -->
+            </aside> <!-- col.// -->
+        </div>
+
+    </div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->

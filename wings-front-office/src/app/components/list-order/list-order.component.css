@@ -1,0 +1,315 @@
+
+.sidenav {
+    width: 250px;
+    background-color: #fff;
+    margin-left: 1%;
+  }
+  
+  /* Style the sidenav links and the dropdown button */
+  .sidenav a, .dropdown-btn {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    color: black;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  /* On mouse-over */
+  .sidenav a:hover, .dropdown-btn:hover {
+    color: #000000;
+    font-size: 18px;
+  
+  }
+  #APC{
+    margin-top: 15px;
+   text-align: center;
+  
+  }
+  
+  
+  /* Main content */
+  .main {
+    margin-left: 200px; /* Same as the width of the sidenav */
+    font-size: 20px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+  }
+  
+  /* Add an active class to the active dropdown button */
+  .active {
+    background-color: #FF6314;
+    color: white;
+  }
+  
+  /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+  .dropdown-container {
+    display: none;
+    background-color: #e5e7ea;
+    padding-left: 8px;
+  }
+  
+  /* Optional: Style the caret down icon */
+  .fa-caret-down {
+    float: right;
+    padding-right: 8px;
+  }
+  
+  /* Some media queries for responsiveness */
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+  .poids{
+  margin-top: 7px;
+  margin-left: 6px;
+  
+  }
+  
+  
+  
+  
+  
+  #fichier {
+   
+    margin-top: 4px;
+    cursor: pointer;
+    color: #FF6314;
+    font-weight: bold;
+  }
+  #fichier:hover {
+    color: #c94d0f;
+  }
+  
+  #fichiere {
+    display: none;
+  }
+  #blah{
+  width: 30px;
+  height:  30px;
+  }
+  #form {
+    
+  
+  width: 340px;
+  background: rgb(255, 255, 255);
+  margin: 0 auto;
+  padding: 20px;
+  
+  }
+  
+  #form ol {
+  padding-left: 0;
+  }
+  
+  #form label,li, div > p {
+  background: #eee;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  list-style-type: none;
+  border: 1px solid #353535;
+  }
+  
+  #form img {
+  
+  height: 64px;
+  order: 1;
+  }
+  
+  #form p {
+    width: 290px;
+    margin-top: -20px;
+  line-height: 32px;
+  padding-left: 10px;
+  background-color: #353535;
+  color: #fbfdff;
+  text-align: center;
+  }
+  
+  #form label {
+    width: 290px;
+    margin-top: -20px;
+  line-height: 32px;
+  padding-left: 10px;
+  background-color: #FF6314;
+  color: #fbfdff;
+  text-align: center;}
+  
+  #form label:hover {
+  background-color: #c94d0f;
+  color: white;
+  }
+  
+  #form label:active {
+  background-color: #8b3910;
+  color: white;
+  }
+  .col-md-9{
+    margin-left: 30px;
+  
+  }
+  #a:hover {
+    color: #FF6314;
+    background-color: #353535;
+    }
+    #b:hover {
+      color: #FF6314;
+      background-color: #353535;
+     
+      }
+      #Commentaire{
+        margin-left: 9px;
+      }
+      #textarea{
+        margin-left: 4px;
+      }
+      #mat{
+        margin-left: 6px;
+        margin-bottom: -14px;
+        
+      }
+      #form{
+        width: 320PX;
+        height: 54px;
+    
+      }
+  
+    
+      
+  
+  
+  
+      
+  img {
+    height: 100%;
+    width: 100%;
+    border-radius: 0.37rem;
+  }
+  .hoverable{
+    position: relative;
+    display: block;
+    cursor: pointer;
+    height: 300px;
+    width: 800px;
+    border: 1px solid #ced4da;
+    border-radius: 0.37rem;
+  }
+  .hoverable .hover-text{
+    position: absolute;
+    display: none;
+    top: 50%;
+    left:  50%;
+    transform: translate(-50%,-50%);   
+    z-index: 2;
+  }
+  .hoverable .background{
+    position: absolute;
+    display: none;
+    top: 0;
+    left:  0;
+    bottom: 0;
+    right: 0;
+    background-color:rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+   
+    z-index: 1;
+  }
+  .hoverable:hover .hover-text{
+    display: block;
+  }
+  .hoverable:hover .background{
+    display: block;
+  }
+  
+  #fileInput{
+    display: none;
+  }
+
+
+
+
+
+  
+  /* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 9999; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 530px;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
+/********************************/
+
+.rate {
+  float: left;
+  height: 46px;
+  padding: 0 10px;
+}
+.rate:not(:checked) > input {
+  position:absolute;
+  top:-9999px;
+}
+.rate:not(:checked) > label {
+  float:right;
+  width:1em;
+  overflow:hidden;
+  white-space:nowrap;
+  cursor:pointer;
+  font-size:30px;
+  color:#ccc;
+}
+.rate:not(:checked) > label:before {
+  content: '★ ';
+}
+.rate > input:checked ~ label {
+  color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+  color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+  color: #c59b08;
+}

@@ -1,0 +1,173 @@
+<!-- partial:index.partial.html -->
+<section>
+  <div class="container" style="max-width:520px;">
+    <header class="mb-4">
+      <h4 class="card-title">Sign up</h4>
+    </header>
+    <form name="form" (ngSubmit)="onSubmit()" #f="ngForm">
+      <div class="step step-1 active">
+        <div class="form-row">
+          <div class="col form-group">
+            <label>Nom</label>
+            <input type="text" class="form-control" name="lastname" [(ngModel)]="form.lastname" required minlength="3"
+              maxlength="25" #lastname="ngModel" />
+            <div class="alert-danger" *ngIf="lastname.errors && f.submitted">
+              <div *ngIf="lastname.errors['required']">Le nom de famille est requis</div>
+              <div *ngIf="lastname.errors['minlength']">
+                Le nom de famille doit comporter au moins 3 caractères
+              </div>
+              <div *ngIf="lastname.errors['maxlength']">
+                Le nom de famille ne doit pas dépasser 25 caractères
+              </div>
+            </div>
+          </div> <!-- form-group end.// -->
+          <div class="col form-group">
+            <label>Prénom</label>
+            <input type="text" class="form-control" name="firstname" [(ngModel)]="form.firstname" required minlength="3"
+              maxlength="25" #firstname="ngModel" />
+            <div class="alert-danger" *ngIf="firstname.errors && f.submitted">
+              <div *ngIf="firstname.errors['required']">Le prénom est requis</div>
+              <div *ngIf="firstname.errors['minlength']">
+                Le prénom doit comporter au moins 3 caractères
+              </div>
+              <div *ngIf="firstname.errors['maxlength']">
+                Le prénom doit comporter au maximum 25 caractères
+              </div>
+            </div>
+          </div> <!-- form-group end.// -->
+        </div> <!-- form-row end.// -->
+        <div class="form-row">
+          <div class="col form-group">
+            <label>Numéro Fiscal</label>
+            <input type="text" class="form-control" name="num_fiscal" pattern="[0-9]{13}" [(ngModel)]="form.tax_num"
+              required minlength="3" maxlength="25" #tax_num="ngModel" />
+            <div class="alert-danger" *ngIf="tax_num.errors && f.submitted">
+              <div *ngIf="tax_num.errors['required']">Numéro fiscal est requis</div>
+
+
+            </div>
+          </div> <!-- form-group end.// -->
+          <div class="col form-group">
+            <label>Nom établissement</label>
+            <input type="text" class="form-control" name="establishment_name" required required minlength="3"
+              maxlength="25" [(ngModel)]="form.establishment_name" #establishment_name="ngModel" />
+            <div class="alert-danger" *ngIf="firstname.errors && f.submitted">
+              <div *ngIf="firstname.errors['required']">Nom établissement est requis</div>
+              <div *ngIf="firstname.errors['minlength']">
+                Le Nom établissement doit comporter au moins 3 caractères
+              </div>
+              <div *ngIf="firstname.errors['maxlength']">
+                Le Nom établissement doit comporter au maximum 30 caractères
+              </div>
+            </div>
+          </div> <!-- form-group end.// -->
+        </div> <!-- form-row end.// -->
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" class="form-control" name="email" [(ngModel)]="form.email" required email
+            #email="ngModel" />
+          <div class="alert-danger" *ngIf="email.errors && f.submitted">
+            <div *ngIf="email.errors['required']">Email est requis</div>
+            <div *ngIf="email.errors['email']">
+              L'e-mail doit être une adresse e-mail valide
+            </div>
+          </div>
+          <small class="form-text text-muted">Nous ne partagerons jamais votre e-mail avec quelqu'un d'autre.</small>
+        </div> <!-- form-group end.// -->
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label>Gouvernorat</label>
+            <select class="form-control" name="gov" [(ngModel)]="form.gov" required #gov="ngModel"
+              (change)="selectChangeHandler($event)">
+              <option selected disabled hidden> Choisir...</option>
+              <option *ngFor="let Governorate of Governorates; " [value]="Governorate.govName">{{ Governorate.govName }}
+              </option>
+            </select>
+
+          </div> <!-- form-group end.// -->
+          <div class="form-group col-md-6">
+            <label>Ville</label>
+            <select class="form-control" name="city" [(ngModel)]="form.city" required #city="ngModel">
+              <option selected disabled hidden> Choisir...</option>
+              <option *ngFor="let city of Citys; let i = index" [value]="city.cityName"> {{ city.cityName }}</option>
+            </select>
+          </div> <!-- form-group end.// -->
+        </div> <!-- form-row.// -->
+        <div class="form-row">
+          <div class="input-group col-6 mx-auto">
+            <label>Mot de passe</label>
+            <div class="form-group inner-addon right-addon">
+              <div>
+                <i alt="show" class="far fa-eye eye-show" (click)="showPassword = !showPassword"
+                  [class.hide]="showPassword"></i>
+                <i alt="hide" class="far fa-eye-slash eye-hide" (click)="showPassword = !showPassword"
+                  [class.hide]="!showPassword"></i>
+
+              </div>
+              <input class="form-control" type="password" name="password" [(ngModel)]="form.password" required
+                minlength="6" #password="ngModel" [type]="showPassword ? 'text' : 'password'">
+
+            </div>
+            <div class="alert-danger" *ngIf="password.errors ">
+              <div *ngIf="password.errors['required']&& f.submitted">Mot de passe requis</div>
+              <div *ngIf="password.errors['minlength']&& f.submitted">
+                Le mot de passe doit être au moins de 6 caractères
+              </div>
+            </div>
+          </div> <!-- form-group end.// -->
+          <div class="form-group col-md-6">
+            <label>Télephone</label>
+            <input class="form-control" type="tel" required pattern="[0-9]{8}" placeholder="xx000000" name="phone"
+              [(ngModel)]="form.phone" />
+          </div> <!-- form-group end.// -->
+        </div>
+
+        <button type="button" class="next-btn">Suivante</button>
+      </div>
+      <div class="step step-2">
+        <div class="form-row">
+          <div class="col form-group">
+            <label><i class="fa fa-bold" aria-hidden="true"></i>
+              Nom de la boutique</label>
+            <input type="text" class="form-control" name="ShopName" required minlength="3" maxlength="25"
+              [(ngModel)]="card.ShopName" />
+          </div> <!-- form-group end.// -->
+          <div class="col form-group">
+
+            <label>
+              Type</label>
+            <select class="form-control" id="type" required [(ngModel)]="card.type" name="type">
+              <option value="" disabled="disabled" default="true">-Choisir une option-
+              </option>
+              <option value="Personne physique">Personne physique</option>
+              <option value="Entité commerciale / Entreprise">Entité commerciale / Entreprise</option>
+            </select>
+          </div> <!-- form-group end.// -->
+        </div>
+        <div class="form-group">
+          <div class="col form-group">
+            <label><i class="fa fa-share" aria-hidden="true"></i>
+              Site web / Page facebook</label>
+            <input type="text" class="form-control" name="WebSite" required minlength="3" maxlength="25"
+              [(ngModel)]="card.WebSite" />
+          </div> <!-- form-group end.// -->
+          <div class="col form-group">
+            <label>Registre commerciale</label>
+            <input type="file" class="form-control-file" (change)="selectFile($event)">
+          </div>
+        </div>
+        <button type="button" class="previous-btn">Précédent</button>
+        <button type="submit" class="submit-btn">S'inscrire</button>
+      </div>
+
+      <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+        L'inscription a échoué !<br />{{ errorMessage }}
+      </div>
+    </form>
+
+    <div class="alert alert-success" *ngIf="isSuccessful">
+      Votre inscription est réussie !
+    </div>
+  </div>
+</section>

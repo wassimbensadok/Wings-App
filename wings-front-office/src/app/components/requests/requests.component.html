@@ -1,0 +1,156 @@
+<section class="section-pagetop bg-gray">
+    <div class="container">
+        <h2 class="title-page" style="text-align: center; font-size: 50PX;">Demandes <span style="color: #FF6314;">de
+                livraison</span></h2>
+    </div> <!-- container //  -->
+</section>
+<section class="section-content padding-y">
+    <div class="container">
+        <div class="row">
+            <div class="sidenav">
+
+                <h1 class="title-page" id="APC">Mon compte</h1>
+                <mat-divider></mat-divider>
+                <a [routerLink]="['/profile-main']" id="a">Aperçu du compte</a>
+                <mat-divider></mat-divider>
+                <button class="list-group-item" id="b" class="dropdown-btn">Ordres
+                  <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-container">
+                  <a [routerLink]="['/home']" id="a">Shop</a>
+                  <mat-divider></mat-divider>
+                  <a [routerLink]="['/list-orders']" id="a">Consulter Ordres</a>
+                </div>
+                <div *ngIf="currentUser.roles.includes('ROLE_USER') && currentUser.isActive">
+                <mat-divider></mat-divider>
+                <button class="list-group-item" id="b" class="dropdown-btn">Demande de livraison
+                  <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-container">
+                  <a [routerLink]="['/add-demand']" id="a">Ajouter Demande</a>
+                  <mat-divider></mat-divider>
+                  <a [routerLink]="['/list-demand']" id="a">Consulter Demandes</a>
+                  <mat-divider></mat-divider>
+                  <a [routerLink]="['/offers']" id="a">Offres de livraison</a>
+                  <mat-divider></mat-divider>
+                  <a [routerLink]="['/requests-send']" id="a">Invitation envoyée</a>
+                </div>
+              </div>
+                <div *ngIf="currentUser.roles.includes('ROLE_DELIVERY') && currentUser.isActive">
+                  <mat-divider></mat-divider>
+                  <button class="list-group-item" id="b" class="dropdown-btn">Offre de livraison
+                    <i class="fa fa-caret-down"></i>
+                  </button>
+                  <div class="dropdown-container">
+                    <a [routerLink]="['/add-offer']" id="a">Ajouter Offre</a>
+                    <mat-divider></mat-divider>
+                    <a [routerLink]="['/list-offer']" id="a">Consulter Offres</a>
+                    <mat-divider></mat-divider>
+                    <a [routerLink]="['/requests']" id="a">Invitation réussie </a>
+                    <mat-divider></mat-divider>
+                  </div>
+                </div>
+                <div  *ngIf="currentUser.roles.includes('ROLE_USER_PRO') && currentUser.isActive">
+                  <mat-divider></mat-divider>
+                  <button class="list-group-item" id="b" class="dropdown-btn">Magasin
+                      <i class="fa fa-caret-down"></i>
+                  </button>
+                  <div class="dropdown-container">
+                      <a [routerLink]="['/card']" id="a">Aperçu du Carte Pro</a>
+                      <mat-divider></mat-divider>
+                      <a [routerLink]="['/add-product']" id="a">Ajouter Produit</a>
+                      <mat-divider></mat-divider>
+                      <a [routerLink]="['/list-product']" id="a">Consulter produit</a>
+                      <mat-divider></mat-divider>
+                  </div>
+              </div>
+                <mat-divider></mat-divider>
+                <a [routerLink]="['/']" id="a">Paramètre</a>
+                <mat-divider></mat-divider>
+                <a [routerLink]="['/']" id="a">Déconnecter</a>
+                <mat-divider></mat-divider>
+        
+        
+              </div>
+            <!-- col.// -->
+            <main class="col-md-9">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <!-- row.// -->
+
+                        <div class="row">
+                            <div>Lorsque vous avez reçu une invitation de quelqu'un, elle apparaît ici.</div>
+
+                        </div> <!-- row.// -->
+                    </div> <!-- card-body .// -->
+                </div>
+                <article class="card mb-4">
+
+                    <!-- card-body .// -->
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="list">
+                            <tbody>
+                                <tr *ngFor="let invitation of invitations | paginate
+                                : {
+                                    itemsPerPage: tableSize,
+                                    currentPage: page,
+                                    totalItems: count
+                                  }; let i = index"
+                                    [class.active]="i == currentIndex">
+                                    <td>
+                                        <p class="title mb-0" (mouseover)="open(invitation)">{{
+                                            invitation.user.firstName }} </p>
+                                        <p class="title mb-0">{{ invitation.user.lastName }} </p>
+                                    </td>
+                                    <td>
+                                        <p class="title mb-0">Type: {{ invitation.demand.type }} </p>
+                                        <p class="title mb-0">destination: {{ invitation.demand.route.arri_gov }} {{
+                                            invitation.demand.route.adr_arrival }} </p>
+
+                                    </td>
+                                    <td> <var class="price text-muted">Récepteur Tel: {{ invitation.demand.tel_receiver
+                                            }} </var> <br>date de livraison: {{ invitation.demand.date_delivery }} </td>
+                                    <td width="250">
+                                        <button class="btn btn-outline-primary"
+                                            *ngIf="invitation.etatInvitation == 'pending'" style="margin-right: 5px;"
+                                            (click)="confirm(invitation.id)">confirmer</button>
+                                        <button class="btn btn-outline-primary"
+                                            *ngIf="invitation.etatInvitation == 'accepted'"
+                                            style="margin-right: 5px;" disabled>confirmed</button>
+                                        <button class="btn btn-outline-secondary" *ngIf="invitation.etatInvitation == 'pending'" (click)="delete(invitation.id)">Refuser</button>
+                                        <button class="btn btn-outline-secondary" *ngIf="invitation.etatInvitation == 'refuse'" disabled style="width: 95.81px;">Refusée</button>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div> <!-- table-responsive .end// -->
+                    <div class="d-flex justify-content-center">
+                        <pagination-controls 
+                        previousLabel="Prev"
+                        nextLabel="Next"
+                        (pageChange)="onTableDataChange($event)"
+                      >
+                        </pagination-controls>
+                    </div>
+                </article> <!-- card order-item .// -->
+
+
+
+
+            </main>
+        </div>
+
+    </div> <!-- container .//  -->
+</section>
+
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content" (mouseleave)="close()">
+        <span class="close" (click)="close()" style="float: right;">&times;</span><br>
+        <p>{{currentInvi}}</p>
+
+    </div>
+
+</div>

@@ -1,0 +1,113 @@
+<div class="main-content">
+
+  <div class="page-content">
+      <div class="container-fluid">
+
+          <!-- start page title -->
+<div class="row">
+<div class="col-12">
+<div class="page-title-box d-sm-flex align-items-center justify-content-between">
+<h4 class="mb-sm-0 font-size-18">Liste des Reclamations</h4>
+
+
+</div>
+</div>
+</div>
+<!-- end page title -->
+          <div class="row">
+              <div class="col-12">
+                  <!-- Left sidebar -->
+
+                  <!-- End Left sidebar -->
+
+
+                  <!-- Right Sidebar -->
+
+
+                      <div class="card">
+                          <div class="btn-toolbar p-3" role="toolbar">
+
+
+
+
+                          </div>
+                          <ul class="message-list">
+                              <li *ngFor="let coment of comments let i = index"
+                              [class.active]="i == currentIndex">>
+                                  <div class="col-mail col-mail-1">
+                                      <div class="checkbox-wrapper-mail">
+                                          <input type="checkbox" id="chk19">
+                                          <label for="chk19" class="toggle"></label>
+                                      </div>
+                                      <a href="#" class="title">{{nom}}</a><span class="star-toggle far fa-star"></span>
+                                  </div>
+                                  <div class="col-mail col-mail-2">
+                                      <a href="#" class="subject">Hello – <span class="teaser">{{comentaire}}</span>
+                                      </a>
+                                      <div class="date">{{date}</div>
+                                  </div>
+                              </li>
+
+                              
+
+                          </ul>
+
+                      </div> <!-- card -->
+
+                      <div class="row">
+                          <div class="col-7">
+                              Showing 1 - 20 of 1,524
+                          </div>
+                          <div class="col-5">
+                              <div class="btn-group float-end">
+                                  <button type="button" class="btn btn-sm btn-success waves-effect"><i class="fa fa-chevron-left"></i></button>
+                                  <button type="button" class="btn btn-sm btn-success waves-effect"><i class="fa fa-chevron-right"></i></button>
+                              </div>
+                          </div>
+                      </div>
+
+                  </div> <!-- end Col-9 -->
+
+              </div>
+
+          </div><!-- End row -->
+
+      </div> <!-- container-fluid -->
+  </div>
+  <!-- End Page-content -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="composemodal" tabindex="-1" role="dialog" aria-labelledby="composemodalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="composemodalTitle">New Message</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <div>
+                      <div class="mb-3">
+                          <input type="email" class="form-control" placeholder="To">
+                      </div>
+
+                      <div class="mb-3">
+                          <input type="text" class="form-control" placeholder="Subject">
+                      </div>
+                      <div class="mb-3">
+                          <form method="post">
+                              <textarea id="email-editor" name="area" style="visibility: hidden;"></textarea>
+                          </form>
+                      </div>
+
+                  </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Send <i class="fab fa-telegram-plane ms-1"></i></button>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- end modal -->
+
+

@@ -1,0 +1,17 @@
+.hide {
+  display: none;
+}
+.inner-addon { 
+    position: relative; 
+}
+.inner-addon .far {
+  position: absolute;
+  padding: 12.8px 10px;
+  z-index: 100;
+  cursor: pointer;
+}
+.left-addon .far  { left:  0px; }
+.right-addon .far { right: 0px; }
+ 
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }

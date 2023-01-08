@@ -1,0 +1,194 @@
+<!-- ========================= SECTION PAGETOP ========================= -->
+<section class="section-pagetop bg-gray">
+    <div class="container">
+        <h2 class="title-page" style="text-align: center; font-size: 50PX;">Consulter votre <span
+                style="color: #FF6314;">
+                Commande</span></h2>
+    </div> <!-- container //  -->
+</section>
+<!-- ========================= SECTION PAGETOP END// ========================= -->
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+    <div class="container">
+        <div class="row">
+            <div class="sidenav">
+
+                <h1 class="title-page" id="APC">Mon compte</h1>
+                <mat-divider></mat-divider>
+                <a [routerLink]="['/profile-main']" id="a">Aperçu du compte</a>
+                <mat-divider></mat-divider>
+                <button class="list-group-item" id="b" class="dropdown-btn">Ordres
+                  <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-container">
+                  <a [routerLink]="['/home']" id="a">Shop</a>
+                  <mat-divider></mat-divider>
+                  <a [routerLink]="['/list-orders']" id="a">Consulter Ordres</a>
+                </div>
+                <div *ngIf="currentUser.roles.includes('ROLE_USER') && currentUser.isActive">
+                <mat-divider></mat-divider>
+                <button class="list-group-item" id="b" class="dropdown-btn">Demande de livraison
+                  <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-container">
+                  <a [routerLink]="['/add-demand']" id="a">Ajouter Demande</a>
+                  <mat-divider></mat-divider>
+                  <a [routerLink]="['/list-demand']" id="a">Consulter Demandes</a>
+                  <mat-divider></mat-divider>
+                  <a [routerLink]="['/offers']" id="a">Offres de livraison</a>
+                  <mat-divider></mat-divider>
+                  <a [routerLink]="['/requests-send']" id="a">Invitation envoyée</a>
+                </div>
+              </div>
+                <div *ngIf="currentUser.roles.includes('ROLE_DELIVERY') && currentUser.isActive">
+                  <mat-divider></mat-divider>
+                  <button class="list-group-item" id="b" class="dropdown-btn">Offre de livraison
+                    <i class="fa fa-caret-down"></i>
+                  </button>
+                  <div class="dropdown-container">
+                    <a [routerLink]="['/add-offer']" id="a">Ajouter Offre</a>
+                    <mat-divider></mat-divider>
+                    <a [routerLink]="['/list-offer']" id="a">Consulter Offres</a>
+                    <mat-divider></mat-divider>
+                    <a [routerLink]="['/requests']" id="a">Invitation réussie </a>
+                    <mat-divider></mat-divider>
+                  </div>
+                </div>
+                <div  *ngIf="currentUser.roles.includes('ROLE_USER_PRO') && currentUser.isActive">
+                  <mat-divider></mat-divider>
+                  <button class="list-group-item" id="b" class="dropdown-btn">Magasin
+                      <i class="fa fa-caret-down"></i>
+                  </button>
+                  <div class="dropdown-container">
+                      <a [routerLink]="['/card']" id="a">Aperçu du Carte Pro</a>
+                      <mat-divider></mat-divider>
+                      <a [routerLink]="['/add-product']" id="a">Ajouter Produit</a>
+                      <mat-divider></mat-divider>
+                      <a [routerLink]="['/list-product']" id="a">Consulter produit</a>
+                      <mat-divider></mat-divider>
+                  </div>
+              </div>
+                <mat-divider></mat-divider>
+                <a [routerLink]="['/']" id="a">Paramètre</a>
+                <mat-divider></mat-divider>
+                <a [routerLink]="['/']" id="a">Déconnecter</a>
+                <mat-divider></mat-divider>
+        
+        
+              </div>
+            <main class="col-md-9">
+
+                <article class="card mb-4" *ngFor="let com of Commands; ">
+                    <header class="card-header">
+
+                        <strong class="d-inline-block mr-3">Order ID: {{com.id}}</strong>
+                        <span>Order Date: {{com.date | slice:0:10}}</span>
+                    </header>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h3 class="text-muted">Livraison à</h3>
+                                <p>{{User.firstName}} {{User.lastName}}<br>
+                                    Phone {{User.phone}} Email: {{User.email}} <br>
+                                    Location: {{User.governorate}}, {{User.address}} <br>
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <h3 class="text-muted">Paiement</h3>
+                                <span class="text-success">
+                                    <i class="fab fa-lg fa-cc-visa"></i>
+                                    Visa **** 4216
+                                </span>
+                                <p>sous-totaux: {{com.totalPrice | currency : 'TND '}}<br>
+                                    Frais de livraison: 7 TND <br>
+                                    <span class="b">Total: {{com.totalPrice+7 | currency : 'TND '}} </span>
+                                </p>
+                            </div>
+                        </div> <!-- row.// -->
+                    </div> <!-- card-body .// -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="http://example.com/" data-toggle="dropdown"
+                            (click)="getComItem(com.id)" style="right: 0;">Article Commandé</a>
+                        <div class="dropdown-menu dropdown-menu-left">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <tbody>
+                                        
+                                        <tr *ngFor="let Item of ComItems;">
+                                            <td width="65">
+                                                <img src="{{Item.product.picture1}}" class="img-xs border">
+                                            </td>
+                                            <td>
+                                                <p class="title mb-0">{{Item.product.name}}</p>
+                                                <var class="price text-muted">{{Item.price}}</var>
+                                            </td>
+                                            <td> Quantite<br>{{Item.quantity}}</td>
+                                            <td width="250"> <a (click)="open(Item.id)"
+                                                    class="btn btn-outline-primary">Notes et avis</a>
+                                                <div class="dropdown d-inline-block">
+                                                    <a href="#" data-toggle="dropdown"
+                                                        class="dropdown-toggle btn btn-outline-secondary">Plus</a>
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        <a href="#" class="dropdown-item">Return</a>
+                                                        <a href="#" class="dropdown-item">Annuler Ordres</a>
+                                                    </div>
+                                                </div> <!-- dropdown.// -->
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </li>
+                </article> <!-- card order-item .// -->
+            </main> <!-- col.// -->
+        </div>
+
+    </div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close" (click)="close()" style="float: right;">&times;</span><br>
+
+        <!-- ============================ COMPONENT FEEDBACK  ================================= -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4 class="card-title mb-4">Notes et avis</h4>
+                <form [formGroup]="form" (ngSubmit)="submit()">
+                    <div class="form-group">
+                        <label>De quoi parle le préavis ?</label>
+                        <textarea class="form-control" rows="3" id="cmnt" name="comment"
+                            formControlName="comment"></textarea>
+                    </div>
+                    <div class="rate">
+                        <input type="radio" id="star5" name="rate" value="5" formControlName="rate" />
+                        <label for="star5" title="text">5 stars</label>
+                        <input type="radio" id="star4" name="rate" value="4" formControlName="rate" />
+                        <label for="star4" title="text">4 stars</label>
+                        <input type="radio" id="star3" name="rate" value="3" formControlName="rate" />
+                        <label for="star3" title="text">3 stars</label>
+                        <input type="radio" id="star2" name="rate" value="2" formControlName="rate" />
+                        <label for="star2" title="text">2 stars</label>
+                        <input type="radio" id="star1" name="rate" value="1" formControlName="rate" />
+                        <label for="star1" title="text">1 star</label>
+                    </div>
+
+                    <button class="btn btn-primary btn-block" type="submit" [disabled]="!form.valid">Envoyer</button>
+                </form>
+                <div class="alert alert-warning" *ngIf="isSignUpFailed">
+                    Votre Notes et avis n'est pas enregistrer !
+                </div>
+                <div class="alert alert-success" *ngIf="isSuccessful">
+                    Votre aNotes et avis est enregistrer !
+                </div>
+            </div> <!-- card-body.// -->
+        </div> <!-- card .// -->
+        <!-- ============================ COMPONENT FEEDBACK END.// ================================= -->
+
+    </div>
+
+</div>
